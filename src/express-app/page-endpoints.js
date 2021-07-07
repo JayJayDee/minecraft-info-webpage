@@ -15,6 +15,17 @@ const pageEndpointsRouter = () => {
 		}
 	);
 
+	router.get('/status',
+		async (_, res) => {
+			const serverStatusFetcher = getServerStatusModule('ServerStatusFetcher');
+			const status = await serverStatusFetcher.fetch();
+			res.render('status', {
+				numPlayers: status.allPlayers.length,
+				onlinePlayers: status.onlinePlayers.length
+			});
+		}
+	);
+
 	return router;
 };
 
