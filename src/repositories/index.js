@@ -1,4 +1,26 @@
+const { getConfiguration } = require('../configurator');
+const { ServerStatusRepository } = require('./server-status-repository');
 
-const initRepositories = () => {
-	
+const repositoryStore = {
+	ServerStatusRepository: null
+};
+
+const initRepositories = (repoStore = repositoryStore) => {
+	const minecraftRestHost = getConfiguration('MINECRAFT_REST_HOST');
+	repoStore.ServerStatusRepository = new ServerStatusRepository({
+		minecraftRestHost
+	});
+};
+
+const getRepository = (key, repoStore = repositoryStore) => {
+	const repo = repoStore[key];
+	if (!repo) {
+		throw new Error(`there are no repository named: ${key}`);
+	}
+	return repo;
+};
+
+module.exports = {
+	initRepositories,
+	getRepository
 };

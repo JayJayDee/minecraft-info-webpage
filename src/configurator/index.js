@@ -4,6 +4,7 @@ const loadMandatory = (key, env = process.env) => {
 	if (!value) {
 		throw new Error(`mandatory variable not supplied, key: ${key}`);
 	}
+	return value;
 };
 
 const configurationStore = {
