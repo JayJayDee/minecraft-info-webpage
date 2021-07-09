@@ -1,4 +1,5 @@
 const { getConfiguration } = require('../configurator');
+const { getLogger } = require('../logger');
 const { ServerStatusRepository } = require('./server-status-repository');
 
 const repositoryStore = {
@@ -6,10 +7,14 @@ const repositoryStore = {
 };
 
 const initRepositories = (repoStore = repositoryStore) => {
+	const logger = getLogger('repository');
+
 	const minecraftRestHost = getConfiguration('MINECRAFT_REST_HOST');
 	repoStore.ServerStatusRepository = new ServerStatusRepository({
 		minecraftRestHost
 	});
+
+	logger.info('repositories are ready');
 };
 
 const getRepository = (key, repoStore = repositoryStore) => {

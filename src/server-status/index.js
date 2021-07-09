@@ -1,3 +1,4 @@
+const { getLogger } = require('../logger');
 const { getRepository } = require('../repositories');
 const { ServerStatusFetcher } = require('./server-status-fetcher');
 
@@ -7,9 +8,13 @@ const moduleStore = {
 
 const initServerStatusModules = (modStore = moduleStore) => {
 	const serverStatusRepository = getRepository('ServerStatusRepository');
-	moduleStore.ServerStatusFetcher = new ServerStatusFetcher({
-		serverStatusRepository
+	const logger = getLogger('servstatus-fetcher');
+
+	modStore.ServerStatusFetcher = new ServerStatusFetcher({
+		serverStatusRepository,
+		logger
 	});
+	logger.info('serverStatusFetcher is ready');
 };
 
 const getServerStatusModule = (key, modStore = moduleStore) => {

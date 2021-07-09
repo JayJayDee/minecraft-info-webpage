@@ -2,9 +2,11 @@
 class ServerStatusFetcher {
 
 	constructor({
-		serverStatusRepository
+		serverStatusRepository,
+		logger
 	}) {
-		this._serverStatusRepo = serverStatusRepository
+		this._serverStatusRepo = serverStatusRepository,
+		this._logger = logger;
 	}
 
 	async fetch() {

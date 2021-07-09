@@ -9,12 +9,22 @@ const loadMandatory = (key, env = process.env) => {
 
 const configurationStore = {
 	HTTP_PORT: null,
-	MINECRAFT_REST_HOST: null
+	MINECRAFT_REST_HOST: null,
+	MYSQL_HOST: null,
+	MYSQL_PORT: null,
+	MYSQL_USER: null,
+	MYSQL_PASSWORD: null,
+	MYSQL_DATABASE: null
 };
 
 const initConfigurations = (store = configurationStore) => {
 	store.HTTP_PORT = loadMandatory('HTTP_PORT');
 	store.MINECRAFT_REST_HOST = loadMandatory('MINECRAFT_REST_HOST');
+	store.MYSQL_HOST = loadMandatory('MYSQL_HOST');
+	store.MYSQL_PORT = loadMandatory('MYSQL_PORT');
+	store.MYSQL_USER = loadMandatory('MYSQL_USER');
+	store.MYSQL_PASSWORD = loadMandatory('MYSQL_PASSWORD');
+	store.MYSQL_DATABASE = loadMandatory('MYSQL_DATABASE');
 };
 
 const getConfiguration = (key, store = configurationStore) => {
