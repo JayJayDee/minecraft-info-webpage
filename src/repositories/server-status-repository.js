@@ -2,6 +2,7 @@ const axios = require('axios');
 const { ServerPlayerVO } = require('./vo/server-player');
 
 class ServerStatusRepository {
+
 	constructor({
 		minecraftRestHost
 	}) {

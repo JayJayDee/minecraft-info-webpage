@@ -1,13 +1,17 @@
 require('dotenv/config');
+
 const { initConfigurations, getConfiguration } = require('./configurator');
 const { initExpressApp } = require('./express-app');
 const { getLogger } = require('./logger');
+const { initSequelizeModels } = require('./mysql-sequelize');
 const { initRepositories } = require('./repositories');
 const { initServerStatusModules } = require('./server-status');
 
 (async () => {
 	const log = getLogger('bootstrap');
+
 	initConfigurations();
+	await initSequelizeModels();
 	initRepositories();
 	initServerStatusModules();
 
