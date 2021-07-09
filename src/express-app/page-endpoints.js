@@ -1,30 +1,41 @@
 const { Router } = require('express');
 const { getServerStatusModule } = require('../server-status');
+const { serverStatusMiddleware } = require('./middlewares/server-status-middleware');
 
 const pageEndpointsRouter = () => {
 	const router = Router();
 
-	router.get('/',
-		async (_, res) => {
-			const serverStatusFetcher = getServerStatusModule('ServerStatusFetcher');
-			const status = await serverStatusFetcher.fetch();
+	router.get('/', [
+		serverStatusMiddleware(),
+		async (req, res) =>
 			res.render('index', {
-				numPlayers: status.allPlayers.length,
-				onlinePlayers: status.onlinePlayers.length
-			});
-		}
-	);
+				... req.serverStatus
+			})
+	]);
 
-	router.get('/status',
-		async (_, res) => {
-			const serverStatusFetcher = getServerStatusModule('ServerStatusFetcher');
-			const status = await serverStatusFetcher.fetch();
+	router.get('/status', [
+		serverStatusMiddleware(),
+		async (req, res) =>
 			res.render('status', {
-				numPlayers: status.allPlayers.length,
-				onlinePlayers: status.onlinePlayers.length
-			});
-		}
-	);
+				... req.serverStatus
+			})
+	]);
+
+	router.get('/guide', [
+		serverStatusMiddleware(),
+		async (req, res) =>
+			res.render('guide', {
+				... req.serverStatus
+			})
+	]);
+
+	router.get('/village', [
+		serverStatusMiddleware(),
+		async (req, res) =>
+			res.render('village', {
+				... req.serverStatus
+			})
+	]);
 
 	return router;
 };

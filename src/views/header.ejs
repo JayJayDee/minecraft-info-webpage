@@ -16,10 +16,10 @@
 			</a>
 
 			<a class="d-flex text-dark text-decoration-none">
-				<% if (onlinePlayers === 0) { %>
+				<% if (numOnlinePlayers === 0) { %>
 					<span>현재 아무도 없습니다.</span>
 				<% } else { %>
-					<span class="fs-6">온라인 <%= onlinePlayers %>명</span>
+					<span class="fs-6"><a href="/status">온라인 <%= numOnlinePlayers %>명</a></span>
 				<% } %>
 			</a>
 		  </header>
