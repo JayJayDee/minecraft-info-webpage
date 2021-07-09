@@ -37,6 +37,22 @@ const pageEndpointsRouter = () => {
 			})
 	]);
 
+	router.get('/project/rail', [
+		serverStatusMiddleware(),
+		async (req, res) =>
+			res.render('project-rail', {
+				... req.serverStatus
+			})
+	]);
+
+	router.get('/project/waterhouse', [
+		serverStatusMiddleware(),
+		async (req, res) =>
+			res.render('project-waterhouse', {
+				... req.serverStatus
+			})
+	]);
+
 	return router;
 };
 

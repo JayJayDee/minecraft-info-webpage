@@ -23,6 +23,23 @@
           
         </ul>
       </div>
+
+      <div class="col-md-6">
+        <h2>전체 사용자들</h2>
+
+        <% if (allPlayers.length > 0) { %>
+          <ul>
+            <% for (const p of allPlayers) { %>
+              <li><%= p.nickname %></li>
+            <% } %>
+          </ul>
+        <% } else { %>
+          <p>아무도 없습니다. 다행이네요.</p>
+        <% } %>
+        <ul>
+
+        </ul>
+      </div>
     </div>
 
 <%- include('./footer.ejs') %>
