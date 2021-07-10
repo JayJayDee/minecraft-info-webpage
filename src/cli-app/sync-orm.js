@@ -1,8 +1,8 @@
 require('dotenv/config');
 
-const { initConfigurations } = require('./configurator');
-const { getLogger } = require('./logger');
-const { initSequelizeModels, getSequelizeModel } = require('./mysql-sequelize');
+const { initConfigurations } = require('../configurator');
+const { getLogger } = require('../logger');
+const { initSequelizeModels, getSequelizeModel } = require('../mysql-sequelize');
 
 (async () => {
 	const log = getLogger('orm-synchronizer');

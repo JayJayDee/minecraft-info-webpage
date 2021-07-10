@@ -9,7 +9,7 @@ class UserPlaytimeRepository {
 		this._sequelizeInstance = sequelizeInstance
 	}
 
-	async insertOrUpdatePlaytime(uuids) {
+	async recordPlaytime(uuids) {
 		if (Array.isArray(uuids) === false) {
 			throw new Error('parameter uuids must be array');
 		}
