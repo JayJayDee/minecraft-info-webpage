@@ -39,7 +39,7 @@ const initConfigurations = (store = configurationStore) => {
 
 const getConfiguration = (key, store = configurationStore) => {
 	const value = store[key];
-	if (!value) {
+	if (value === undefined) {
 		throw new Error(`configuration not found for key: ${key}`);
 	}
 	return value;

@@ -1,3 +1,4 @@
+const { PlaytimeVO } = require("./vo/playtime-vo");
 
 class UserPlaytimeRepository {
 
@@ -48,13 +49,25 @@ class UserPlaytimeRepository {
 				}
 			}
 			await transaction.commit();
-			return players;
+			return players.map(PlaytimeVO.fromDBResponseElement);
 
 		} catch (err) {
 			await transaction.rollback();
 			this._logger.error(err);
 			throw err;
 		}
+	}
+
+	async findPlaytimesOrdered(limit) {
+		const allPlaytimeRecords = await this._userPlaytimeModel.find();
+		const allPlaytimes = allPlaytimeRecords.map(PlaytimeVO.fromDBResponseElement);
+
+		const sorted = allPlaytimes.sort((a, b) => a.minPlayed > b.minPlayed ? 1 : -1);
+
+		if (limit === undefined) {
+			return sorted;
+		}
+		return sorted.slice(0, limit);
 	}
 }
 
