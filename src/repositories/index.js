@@ -21,7 +21,8 @@ const initRepositories = (repoStore = repositoryStore) => {
 	const sequelizeInstance = getSequelizeModel('sequelize');
 	repoStore.UserPlaytimeRepository = new UserPlaytimeRepository({
 		userPlaytimeModel,
-		sequelizeInstance
+		sequelizeInstance,
+		logger: getLogger('userPlaytimeRepository')
 	});
 
 	logger.info('repositories are ready');

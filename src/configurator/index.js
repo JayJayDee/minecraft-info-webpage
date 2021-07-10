@@ -7,6 +7,14 @@ const loadMandatory = (key, env = process.env) => {
 	return value;
 };
 
+const loadOptional = (key, defaultValue, env = process.env) => {
+	const value = env[key];
+	if (!value) {
+		return defaultValue;
+	}
+	return value;
+}
+
 const configurationStore = {
 	HTTP_PORT: null,
 	MINECRAFT_REST_HOST: null,
@@ -14,7 +22,8 @@ const configurationStore = {
 	MYSQL_PORT: null,
 	MYSQL_USER: null,
 	MYSQL_PASSWORD: null,
-	MYSQL_DATABASE: null
+	MYSQL_DATABASE: null,
+	DISABLE_CRONJOB: null
 };
 
 const initConfigurations = (store = configurationStore) => {
@@ -25,6 +34,7 @@ const initConfigurations = (store = configurationStore) => {
 	store.MYSQL_USER = loadMandatory('MYSQL_USER');
 	store.MYSQL_PASSWORD = loadMandatory('MYSQL_PASSWORD');
 	store.MYSQL_DATABASE = loadMandatory('MYSQL_DATABASE');
+	store.DISABLE_CRONJOB = loadOptional('DISABLE_CRONJOB', null);
 };
 
 const getConfiguration = (key, store = configurationStore) => {

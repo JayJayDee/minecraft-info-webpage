@@ -19,7 +19,8 @@ const initSequelizeModels = async (store = modelInstancesStore) => {
 		database: getConfiguration('MYSQL_DATABASE'),
 		username: getConfiguration('MYSQL_USER'),
 		password: getConfiguration('MYSQL_PASSWORD'),
-		dialect: 'mysql'
+		dialect: 'mysql',
+		logging: false
 	});
 	await sequelize.authenticate();
 	logger.info(`connection established, host: ${host}`);

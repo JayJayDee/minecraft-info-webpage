@@ -2,9 +2,14 @@
 const userPlaytimeModel = ({ sequelize, DataTypes, commonOpts }) =>
 	sequelize.define('UserPlaytime', {
 		uuid: {
-			type: DataTypes.STRING(30),
+			type: DataTypes.STRING(50),
 			allowNull: false,
 			primaryKey: true
+		},
+
+		nickname: {
+			type: DataTypes.STRING(30),
+			allowNull: false
 		},
 
 		minPlayed: {
