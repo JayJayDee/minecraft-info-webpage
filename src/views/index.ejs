@@ -12,6 +12,22 @@
     <hr class="col-3 col-md-2 mb-5">
 
     <div class="row g-5">
+
+      <div class="col-md-6">
+        <h2>망령 TOP 5</h2>
+        <p>이 서버에서 가장 많은 시간을 보낸 5명의 망령을 소개합니다. 자랑스럽네요.</p>
+        <ul class="icon-list">
+          <% var rank = 1; %>
+          <% for (const g of ghostsTop5) { %>
+            <% const { hour, minute } = g.getHourMin(); %>
+            <li><%= rank %>위 - <%= g.nickname %>, <%= hour %>시간 <%= minute %>분</li>
+            <% rank++; %>
+          <% } %>
+        </ul>
+        <p>모든 플레이어의 기록도 한번 보세요. <a href="/status">보러가기</a></p>
+      </div>
+
+
       <div class="col-md-6">
         <h2>건설 프로젝트</h2>
         <p>우리는 더 많은 건설노예가 필요해요. 다음 건설 프로젝트에 자원해 보세요</p>

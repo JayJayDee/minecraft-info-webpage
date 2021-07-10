@@ -24,9 +24,9 @@ class PlaytimeVO {
 	}
 
 	static fromDBResponseElement(element) {
-		return new ServerPlayerVO({
+		return new PlaytimeVO({
 			uuid: element.uuid,
-			nickname: element.displayName,
+			nickname: element.nickname,
 			minPlayed: element.minPlayed
 		});
 	}

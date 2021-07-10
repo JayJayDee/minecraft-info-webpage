@@ -58,16 +58,9 @@ class UserPlaytimeRepository {
 		}
 	}
 
-	async findPlaytimesOrdered(limit) {
-		const allPlaytimeRecords = await this._userPlaytimeModel.find();
-		const allPlaytimes = allPlaytimeRecords.map(PlaytimeVO.fromDBResponseElement);
-
-		const sorted = allPlaytimes.sort((a, b) => a.minPlayed > b.minPlayed ? 1 : -1);
-
-		if (limit === undefined) {
-			return sorted;
-		}
-		return sorted.slice(0, limit);
+	async findPlaytimes() {
+		const allPlaytimeRecords = await this._userPlaytimeModel.findAll({});
+		return allPlaytimeRecords.map(PlaytimeVO.fromDBResponseElement);
 	}
 }
 

@@ -7,10 +7,17 @@ const pageEndpointsRouter = () => {
 
 	router.get('/', [
 		serverStatusMiddleware(),
-		async (req, res) =>
+		async (req, res) => {
+			const statusFetcher = getServerStatusModule('ServerStatusFetcher');
+			const ghostsTop5 = await statusFetcher.playtimeRanks({
+				take: 3
+			});
+
 			res.render('index', {
-				... req.serverStatus
-			})
+				... req.serverStatus,
+				ghostsTop5
+			});
+		}
 	]);
 
 	router.get('/status', [
