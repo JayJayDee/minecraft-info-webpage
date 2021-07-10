@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { shuffle } = require('lodash');
 const { getServerStatusModule } = require('../server-status');
 const { serverStatusMiddleware } = require('./middlewares/server-status-middleware');
 
@@ -13,9 +14,20 @@ const pageEndpointsRouter = () => {
 				take: 5
 			});
 
+			const catchphrases = [
+				'우리는 짓는다 건물을',
+				'우리는 캔다 철광석을',
+				'우리는 굽는다 벽돌을',
+				'우리는 캔다 다이어몬드를',
+				'우리는 깐다 철도레일을',
+				'우리는 만든다 철곡괭이를'
+			];
+			const catchphrase = shuffle(catchphrases)[0];
+
 			res.render('index', {
 				... req.serverStatus,
-				ghostsTop5
+				ghostsTop5,
+				catchphrase
 			});
 		}
 	]);
