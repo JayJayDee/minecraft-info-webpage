@@ -39,5 +39,6 @@ jobs:
         username: ${{ secrets.STAGE_SERVER_USERNAME }}
         password: ${{ secrets.STAGE_SERVER_PASSWORD }}
         script: | 
+          source ~/.profile
           npm --prefix minecraft-webpage install --only=production
           pm2 restart minecraft-webpage/ecosystem.config.js
