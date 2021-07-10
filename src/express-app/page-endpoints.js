@@ -10,7 +10,7 @@ const pageEndpointsRouter = () => {
 		async (req, res) => {
 			const statusFetcher = getServerStatusModule('ServerStatusFetcher');
 			const ghostsTop5 = await statusFetcher.playtimeRanks({
-				take: 3
+				take: 5
 			});
 
 			res.render('index', {
