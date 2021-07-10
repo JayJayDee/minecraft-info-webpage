@@ -1,0 +1,40 @@
+name: deploy-prd
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to server (sources)
+      uses: horochx/deploy-via-scp@master
+      with:
+        local: src/*
+        remote: /home/jaydee/minecraft-webpage/src
+        host: ${{ secrets.STAGE_SERVER_HOST }}
+        port: 2222
+        user: jaydee
+        key: ${{ secrets.STAGE_SSH_PRIVATE_KEY }}
+
+    - name: Deploy to server (package specs)
+      uses: horochx/deploy-via-scp@master
+      with:
+        local: package*
+        remote: /home/jaydee/minecraft-webpage/
+        host: ${{ secrets.STAGE_SERVER_HOST }}
+        port: 2222
+        user: jaydee
+        key: ${{ secrets.STAGE_SSH_PRIVATE_KEY }}
+
+    - name: npm install & process restart
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.STAGE_SERVER_HOST }}
+        port: 2222
+        username: jaydee
+        key: ${{ secrets.STAGE_SSH_PRIVATE_KEY }}
+        script: | 
+          npm --prefix minecraft-webpage install --only=production
+          pm2 restart minecraft-webpage/ecosystem.config.js
