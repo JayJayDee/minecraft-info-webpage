@@ -7,6 +7,22 @@
 
     <div class="row g-5">
       <div class="col-md-6">
+        <h2>노고에 감사드립니다.</h2>
+
+        <% let allMin = 0; %>
+        <% const numAllPlayer = allPlayers.length; %>
+        <% for (const p of allRanks) { %>
+        <%    allMin = allMin + p.minPlayed; %>
+        <% } %>
+
+        <% const allHour = Math.floor(allMin / 60); %>
+        <% const restMin = allMin % 60; %>
+
+        <p><%= numAllPlayer %>명의 플레이어가 총 <%= allHour %>시간 <%= restMin %>분의 귀-중한 시간을 투자해 주셨습니다. 오늘도 무사히!</p>
+
+      </div>
+
+      <div class="col-md-6">
         <h2>온라인 사용자</h2>
 
         <% if (onlinePlayers.length > 0) { %>
@@ -18,9 +34,6 @@
         <% } else { %>
           <p>현재 아무도 없습니다. 다행이네요.</p>
         <% } %>
-        <ul>
-          
-        </ul>
       </div>
 
       <div class="col-md-12">
