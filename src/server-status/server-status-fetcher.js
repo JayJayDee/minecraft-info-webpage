@@ -1,3 +1,4 @@
+const { PlaytimeVO } = require("../repositories/vo/playtime-vo");
 
 class ServerStatusFetcher {
 
@@ -24,9 +25,22 @@ class ServerStatusFetcher {
 	async playtimeRanks({
 		take
 	} = {}) {
+		const allPlayers = await this._serverStatusRepo.findAllPlayers();
 		const allRecords = await this._userPlaytimeRepository.findPlaytimes();
+
+		const convertedAllPlayers =
+			allPlayers.map(p => {
+				const foundRecord = allRecords.find(r => r.uuid === p.uuid);
+				return new PlaytimeVO({
+					uuid: p.uuid,
+					nickname: p.nickname,
+					minPlayed: foundRecord ? foundRecord.minPlayed : undefined,
+					lastPlayedTime: foundRecord ? foundRecord.lastPlayedTime : undefined
+				});
+		});
+
 		const sorted =
-			allRecords.sort((a, b) =>
+			convertedAllPlayers.sort((a, b) =>
 				a.minPlayed > b.minPlayed ? -1 : 1);
 
 		if (take === undefined) {

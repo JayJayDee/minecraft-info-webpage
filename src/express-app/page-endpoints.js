@@ -34,10 +34,15 @@ const pageEndpointsRouter = () => {
 
 	router.get('/status', [
 		serverStatusMiddleware(),
-		async (req, res) =>
+		async (req, res) => {
+			const statusFetcher = getServerStatusModule('ServerStatusFetcher');
+			const allRanks = await statusFetcher.playtimeRanks();
+
 			res.render('status', {
-				... req.serverStatus
-			})
+				... req.serverStatus,
+				allRanks
+			});
+		}
 	]);
 
 	router.get('/guide', [
