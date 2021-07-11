@@ -14,6 +14,14 @@ const pageEndpointsRouter = () => {
 				take: 5
 			});
 
+			const frontPictures= [
+				'carousel-01.png',
+				'carousel-02.png',
+				'carousel-03.png',
+				'carousel-04.png'
+			];
+			const frontPicture = shuffle(frontPictures)[0];
+
 			const catchphrases = [
 				'우리는 짓는다 건물을',
 				'우리는 캔다 철광석을',
@@ -27,7 +35,8 @@ const pageEndpointsRouter = () => {
 			res.render('index', {
 				... req.serverStatus,
 				ghostsTop5,
-				catchphrase
+				catchphrase,
+				frontPicture
 			});
 		}
 	]);
