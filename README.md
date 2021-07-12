@@ -27,3 +27,10 @@ For example, the `server-status` module has a initializer named `initServerStatu
 
 
 Calling the initializer in module, not an initializer is not recommended. (maybe occurs the circular dependency problem)
+
+# Roadmap
+- 플레이어 채팅 및 죽음 이벤트 로깅
+- 죽음 이벤트 발생시 서버 글로벌 무사고 n 시간 초기화 
+- 무사고 n시간은 매 시간 1분에 notify
+- 서버 전체 Daily backup 및 S3에 스냅샷 업로드 (5일치만 보관)
+- 업로드한 스냅샷 가져갈 수 있도록 수정
