@@ -1,12 +1,14 @@
 const { getConfiguration } = require('../configurator');
 const { getLogger } = require('../logger');
 const { getSequelizeModel } = require('../mysql-sequelize');
+const { PlayerEventRepository } = require('./player-event-repository');
 const { ServerStatusRepository } = require('./server-status-repository');
 const { UserPlaytimeRepository } = require('./user-playtime-repository');
 
 const repositoryStore = {
 	ServerStatusRepository: null,
-	UserPlaytimeRepository: null
+	UserPlaytimeRepository: null,
+	PlayerEventRepository: null
 };
 
 const initRepositories = (repoStore = repositoryStore) => {
@@ -23,6 +25,10 @@ const initRepositories = (repoStore = repositoryStore) => {
 		userPlaytimeModel,
 		sequelizeInstance,
 		logger: getLogger('userPlaytimeRepository')
+	});
+
+	repoStore.PlayerEventRepository = new PlayerEventRepository({
+		logger: getLogger('playerEventRepository')
 	});
 
 	logger.info('repositories are ready');
