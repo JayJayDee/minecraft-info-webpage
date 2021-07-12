@@ -43,7 +43,7 @@
           <ul>
             <% for (const r of allRanks) { %>
               <% const { hour, minute } = r.getHourMin(); %>
-              <li><b><%= r.nickname %></b> - 플탐 <%= hour %>시간 <%= minute %>분 - <small><span class="text-muted">마지막 접속 <%= r.lastPlayedExpressionFromNow() %></span></small></li>
+              <li><b><%= r.nickname %></b> - 총 <%= hour %>시간 <%= minute %>분 플레이 - <small><span class="text-muted"><%= r.lastPlayedExpressionFromNow() %></span></small></li>
             <% } %>
           </ul>
         <% } else { %>
