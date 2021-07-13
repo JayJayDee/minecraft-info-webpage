@@ -24,7 +24,8 @@ const configurationStore = {
 	MYSQL_PASSWORD: null,
 	MYSQL_DATABASE: null,
 	DISABLE_CRONJOB: null,
-	ENABLE_MOCK_STATUS_FETCHER: null
+	ENABLE_MOCK_STATUS_FETCHER: null,
+	TG_TOKEN: null
 };
 
 const initConfigurations = (store = configurationStore) => {
@@ -37,6 +38,7 @@ const initConfigurations = (store = configurationStore) => {
 	store.MYSQL_DATABASE = loadMandatory('MYSQL_DATABASE');
 	store.DISABLE_CRONJOB = loadOptional('DISABLE_CRONJOB', null);
 	store.ENABLE_MOCK_STATUS_FETCHER = loadOptional('ENABLE_MOCK_STATUS_FETCHER', null);
+	store.TG_TOKEN = loadOptional('TG_TOKEN', null);
 };
 
 const getConfiguration = (key, store = configurationStore) => {

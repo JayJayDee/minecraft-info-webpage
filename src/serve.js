@@ -7,6 +7,7 @@ const { getLogger } = require('./logger');
 const { initSequelizeModels } = require('./mysql-sequelize');
 const { initRepositories } = require('./repositories');
 const { initServerStatusModules } = require('./server-status');
+const { initTelegramBot } = require('./tg-app');
 
 (async () => {
 	const log = getLogger('bootstrap');
@@ -15,6 +16,7 @@ const { initServerStatusModules } = require('./server-status');
 	await initSequelizeModels();
 	initRepositories();
 	initServerStatusModules();
+	initTelegramBot(getConfiguration('TG_TOKEN'), getConfiguration('MINECRAFT_REST_HOST'));
 
 	const port = getConfiguration('HTTP_PORT');
 	const webserver = initExpressApp();
