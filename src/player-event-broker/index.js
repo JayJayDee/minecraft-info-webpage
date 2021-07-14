@@ -1,5 +1,6 @@
 const { getLogger } = require('../logger');
 const { DefaultEventBroker } = require('./default-event-broker');
+const { InMemoryPubsubHandler } = require('./inmemory-pubsub-handler');
 
 const brokerInstancesStore = {
 	Default: null
@@ -7,8 +8,11 @@ const brokerInstancesStore = {
 
 const initEventBroker = (store = brokerInstancesStore) => {
 	const logger = getLogger('event-broker-default');
+
+	const pubsubHandler = new InMemoryPubsubHandler();
 	store.Default = new DefaultEventBroker({
-		logger
+		logger,
+		pubsubHandler
 	});
 };
 

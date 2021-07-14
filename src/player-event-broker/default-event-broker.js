@@ -2,9 +2,11 @@
 class DefaultEventBroker {
 
 	constructor({
-		logger
+		logger,
+		pubsubHandler
 	}) {
 		this._logger = logger;
+		this._pubsubHandler = pubsubHandler;
 	}
 }
 

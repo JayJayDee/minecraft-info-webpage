@@ -27,8 +27,9 @@
     "lodash": "^4.17.21",
     "luxon": "^1.28.0",
     "mysql2": "^2.2.5",
+    "nanoid": "^3.1.23",
     "node-cron": "^3.0.0",
-    "sequelize": "^6.6.5",
-    "node-telegram-bot-api": "^0.40.0"
+    "node-telegram-bot-api": "^0.40.0",
+    "sequelize": "^6.6.5"
   }
 }
