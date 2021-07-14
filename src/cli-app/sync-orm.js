@@ -13,7 +13,7 @@ const { initSequelizeModels, getSequelizeModel } = require('../mysql-sequelize')
 	await initSequelizeModels();
 
 	const sequelize = getSequelizeModel('sequelize');
-	await sequelize.sync({ force: true });
+	await sequelize.sync({ force: false });
 
 	log.info('completed');
 	process.exit(0);

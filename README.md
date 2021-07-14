@@ -28,6 +28,26 @@ For example, the `server-status` module has a initializer named `initServerStatu
 
 Calling the initializer in module, not an initializer is not recommended. (maybe occurs the circular dependency problem)
 
+# The EventBroker API
+the `EventBroker` implementations allows to each modules to stream events from player's action. you can subscribe some topics that publishes event from producers.
+
+## Usage roadmap
+- the `CronJobApp` will be replaced with this `EventBroker` API, for time-related notifications.
+- the `TgApp` will use the `EventBroker` for subscribe Player chats event
+
+## Example
+```javascript
+const broker = getEventBroker();
+const topic = 'chat-stream';
+
+const subscriptionId = broker.subscribe(topic, (payload) => {
+	// do something with payload
+});
+
+// use your subscriptionId for unsubscribe()
+broker.unsubscribe(subscriptionId);
+```
+
 # Roadmap
 - 플레이어 채팅 및 죽음 이벤트 로깅
 - 죽음 이벤트 발생시 서버 글로벌 무사고 n 시간 초기화 
