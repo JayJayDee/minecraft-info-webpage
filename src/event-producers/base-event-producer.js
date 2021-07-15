@@ -1,7 +1,6 @@
 
 class BaseEventProducer {
-	
-	publish() {}
+	handleEvent() {}
 }
 
 module.exports = {

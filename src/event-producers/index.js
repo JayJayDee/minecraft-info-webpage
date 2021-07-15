@@ -1,6 +1,7 @@
 const { getEventBroker } = require('../event-broker');
 const { PlayerEventProducer } = require('./player-event-producer');
-const { WellKnownTopics } = require('./well-known-topics');
+const { WellKnownTopics } = require('../well-known-topics');
+const { getLogger } = require('../logger');
 
 const eventProducerInstancesStore = {
 	PlayerEvent: null
@@ -10,7 +11,8 @@ const initEventProducers = (store = eventProducerInstancesStore) => {
 	const eventBroker = getEventBroker();
 
 	store.PlayerEvent = new PlayerEventProducer({
-		eventBroker
+		eventBroker,
+		logger: getLogger('playerEventProducer')
 	});
 };
 

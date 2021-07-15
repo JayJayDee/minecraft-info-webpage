@@ -1,7 +1,11 @@
 
 class WellKnownTopics {
 	static CHAT() {
-		return 'chat';
+		return 'player:chat';
+	}
+
+	static DEATH() {
+		return 'player:death';
 	}
 
 	static TIME_HOURLY() {

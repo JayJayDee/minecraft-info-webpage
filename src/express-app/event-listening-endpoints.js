@@ -1,4 +1,5 @@
 const { Router, json } = require('express');
+const { getEventProducer } = require('../event-producers');
 const { getMiddleware } = require('./middlewares');
 
 const eventListeningRouter = ({
@@ -10,7 +11,8 @@ const eventListeningRouter = ({
 	router.post('/listen', [
 		getMiddleware('EventListenAuth'),
 		async (req, res) => {
-			logger.debug(JSON.stringify(req.body));
+			const eventProducer = getEventProducer('PlayerEvent');
+			eventProducer.handleEvent(req.body);
 			res.status(200).json({});
 		}
 	]);
