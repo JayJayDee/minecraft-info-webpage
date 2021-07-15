@@ -5,7 +5,6 @@ const eventListenAuthMiddleware = ({
 } = {}) => [
 	bearerToken(),
 	(req, _, next) => {
-
 		if (!eventListeningKey) {
 			return next();
 		}
