@@ -9,6 +9,7 @@ const { initEventBroker } = require('./event-broker');
 const { initRepositories } = require('./repositories');
 const { initServerStatusModules } = require('./server-status');
 const { initTelegramBot } = require('./tg-app');
+const { initEventProducers } = require('./event-producers');
 
 (async () => {
 	const log = getLogger('bootstrap');
@@ -17,6 +18,8 @@ const { initTelegramBot } = require('./tg-app');
 	await initSequelizeModels();
 	initRepositories();
 	initEventBroker();
+	initEventProducers();
+
 	initServerStatusModules();
 
 	const port = getConfiguration('HTTP_PORT');
