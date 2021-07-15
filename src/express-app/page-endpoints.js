@@ -1,13 +1,14 @@
 const { Router } = require('express');
 const { shuffle } = require('lodash');
+
 const { getServerStatusModule } = require('../server-status');
-const { serverStatusMiddleware } = require('./middlewares/server-status-middleware');
+const { getMiddleware } = require('./middlewares');
 
 const pageEndpointsRouter = () => {
 	const router = Router();
 
 	router.get('/', [
-		serverStatusMiddleware(),
+		getMiddleware('ServerStatus'),
 		async (req, res) => {
 			const statusFetcher = getServerStatusModule('ServerStatusFetcher');
 			const ghostsTop5 = await statusFetcher.playtimeRanks({
@@ -42,7 +43,7 @@ const pageEndpointsRouter = () => {
 	]);
 
 	router.get('/status', [
-		serverStatusMiddleware(),
+		getMiddleware('ServerStatus'),
 		async (req, res) => {
 			const statusFetcher = getServerStatusModule('ServerStatusFetcher');
 			const allRanks = await statusFetcher.playtimeRanks();
@@ -55,7 +56,7 @@ const pageEndpointsRouter = () => {
 	]);
 
 	router.get('/guide', [
-		serverStatusMiddleware(),
+		getMiddleware('ServerStatus'),
 		async (req, res) =>
 			res.render('guide', {
 				... req.serverStatus
@@ -63,7 +64,7 @@ const pageEndpointsRouter = () => {
 	]);
 
 	router.get('/village', [
-		serverStatusMiddleware(),
+		getMiddleware('ServerStatus'),
 		async (req, res) =>
 			res.render('village', {
 				... req.serverStatus
@@ -71,7 +72,7 @@ const pageEndpointsRouter = () => {
 	]);
 
 	router.get('/project/rail', [
-		serverStatusMiddleware(),
+		getMiddleware('ServerStatus'),
 		async (req, res) =>
 			res.render('project-rail', {
 				... req.serverStatus
@@ -79,7 +80,7 @@ const pageEndpointsRouter = () => {
 	]);
 
 	router.get('/project/waterhouse', [
-		serverStatusMiddleware(),
+		getMiddleware('ServerStatus'),
 		async (req, res) =>
 			res.render('project-waterhouse', {
 				... req.serverStatus

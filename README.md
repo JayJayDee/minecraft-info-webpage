@@ -5,6 +5,7 @@ An informational webpage for personal minecraft server.
 Before run, you must supply following environment variables, or you can use `dotenv` as an environment variables store. in that case, just place your `.env` file in your project root.
 ```bash
 HTTP_PORT=55555
+EVENT_LISTENING_KEY=***
 MINECRAFT_REST_HOST=http://127.0.0.1:4567
 MYSQL_HOST=***
 MYSQL_PORT=3306

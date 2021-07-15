@@ -25,7 +25,8 @@ const configurationStore = {
 	MYSQL_DATABASE: null,
 	DISABLE_CRONJOB: null,
 	ENABLE_MOCK_STATUS_FETCHER: null,
-	TG_TOKEN: null
+	TG_TOKEN: null,
+	EVENT_LISTENING_KEY: null
 };
 
 const initConfigurations = (store = configurationStore) => {
@@ -39,6 +40,7 @@ const initConfigurations = (store = configurationStore) => {
 	store.DISABLE_CRONJOB = loadOptional('DISABLE_CRONJOB', null);
 	store.ENABLE_MOCK_STATUS_FETCHER = loadOptional('ENABLE_MOCK_STATUS_FETCHER', null);
 	store.TG_TOKEN = loadOptional('TG_TOKEN', null);
+	store.EVENT_LISTENING_KEY = loadOptional('EVENT_LISTENING_KEY', null);
 };
 
 const getConfiguration = (key, store = configurationStore) => {
