@@ -30,6 +30,15 @@
     <p>모든 플레이어의 기록도 한번 보세요. <a href="/status">보러가기</a></p>
   </div>
 
+  <div class="col-md-6">
+    <h2>최근 채팅</h2>
+    <ul>
+      <% for (const chat of recentChats) { %>
+        <li><b><%= chat.nickname %></b> - <%= chat.message %> - <small><span class="text-muted"><%= chat.lastEventExpressionFromNow() %></span></small></li>
+      <% } %>
+    </ul>
+    <p>더 많은 채팅을 확인해보세요. <a href="/chats">보러가기</a></p>
+  </div>
 
   <div class="col-md-6">
     <h2>건설 프로젝트</h2>

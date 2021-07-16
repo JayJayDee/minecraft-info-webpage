@@ -1,4 +1,5 @@
-const { PlaytimeVO } = require("../repositories/vo/playtime-vo");
+const { ChatEventVO } = require('../event-producers/vo');
+const { PlaytimeVO } = require('../repositories/vo/playtime-vo');
 
 class ServerStatusFetcher {
 
@@ -54,11 +55,11 @@ class ServerStatusFetcher {
 	async latestChats({
 		take
 	} = {}) {
-		const chatEvents = this._userEventRepository.findPlayerEvents({
+		const playerEvents = await this._userEventRepository.findPlayerEvents({
 			types: ['PlayerChat', 'PlayerJoin'],
 			take: take ? take : 20
 		})
-		return chatEvents;
+		return playerEvents.map(ChatEventVO.fromPlayerEventVO);
 	}
 }
 

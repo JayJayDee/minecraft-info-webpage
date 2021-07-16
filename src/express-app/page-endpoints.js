@@ -14,6 +14,9 @@ const pageEndpointsRouter = () => {
 			const ghostsTop5 = await statusFetcher.playtimeRanks({
 				take: 5
 			});
+			const recentChats = await statusFetcher.latestChats({
+				take: 6
+			});
 
 			const frontPictures= [
 				'carousel-01.png',
@@ -36,6 +39,7 @@ const pageEndpointsRouter = () => {
 			res.render('index', {
 				... req.serverStatus,
 				ghostsTop5,
+				recentChats,
 				catchphrase,
 				frontPicture
 			});
@@ -58,12 +62,14 @@ const pageEndpointsRouter = () => {
 	router.get('/chats', [
 		getMiddleware('ServerStatus'),
 		async (req, res) => {
+			const take = req.query.take ? Number(req.query.take) : 20;
 			const statusFetcher = getServerStatusModule('ServerStatusFetcher');
-			const chats = await statusFetcher.latestChats({ take: 20 });
+			const chats = await statusFetcher.latestChats({ take });
 
 			res.render('chats', {
-				... req.serverStatus,
-				chats
+				chats,
+				take,
+				... req.serverStatus
 			});
 		}
 	]);

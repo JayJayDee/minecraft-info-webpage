@@ -1,0 +1,20 @@
+<%- include('./header.ejs') %>
+
+<h1>Chats</h1>
+<p>서버 내에서의 최근 채팅을 볼 수 있습니다.</p>
+<hr class="col-3 col-md-2 mb-5">
+
+<% if (chats.length > 0) { %>
+<ul>
+	<% for (const chat of chats) { %>
+	<li><b><%= chat.nickname %></b> - <%= chat.message %> - <small><span class="text-muted"><%= chat.lastEventExpressionFromNow() %></span></small></li>
+	<% } %>
+</ul>
+
+<a href="/chats?take=<%= take + 10 %>" class="btn btn-primary">더 보기</a>
+
+<% } else { %>
+<p>채팅이 없어요 .. 좀 떠들어 줍시다.</p>
+<% } %>
+
+<%- include('./footer.ejs') %>

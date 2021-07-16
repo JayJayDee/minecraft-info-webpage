@@ -35,7 +35,6 @@ class DefaultEventBroker {
 	}
 
 	unsubscribe(topicName, subscriptionId) {
-		this._prepareTopicMap(topicName);
 		const topic = this._getTopicOrCreate(topicName);
 		topic.delete(subscriptionId);
 	}
