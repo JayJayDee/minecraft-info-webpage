@@ -49,6 +49,9 @@ const subscriptionId =
 // use your subscriptionId for unsubscribe()
 broker.unsubscribe(subscriptionId);
 ```
+for more example for `EventBroker` uses, see the following codes:
+- `/src/player-event-recorder/index.js`
+- `/src/cronjob-app/index.js`
 
 ## Well-known topics
 - `WellKnownTopics.CHAT()` - Player chat event - `ChatEventVO`
