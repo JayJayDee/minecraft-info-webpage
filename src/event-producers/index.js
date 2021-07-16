@@ -2,9 +2,11 @@ const { getEventBroker } = require('../event-broker');
 const { PlayerEventProducer } = require('./player-event-producer');
 const { WellKnownTopics } = require('../well-known-topics');
 const { getLogger } = require('../logger');
+const { TimeEventProducer } = require('./time-event-producer');
 
 const eventProducerInstancesStore = {
-	PlayerEvent: null
+	PlayerEvent: null,
+	TimeEvent: null
 };
 
 const initEventProducers = (store = eventProducerInstancesStore) => {
@@ -13,6 +15,11 @@ const initEventProducers = (store = eventProducerInstancesStore) => {
 	store.PlayerEvent = new PlayerEventProducer({
 		eventBroker,
 		logger: getLogger('playerEventProducer')
+	});
+
+	store.TimeEvent = new TimeEventProducer({
+		eventBroker,
+		logger: getLogger('timeEventProducer')
 	});
 };
 

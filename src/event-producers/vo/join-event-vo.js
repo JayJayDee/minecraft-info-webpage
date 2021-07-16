@@ -21,6 +21,7 @@ class JoinEventVO {
 
 	static fromEventAPIResponse(response) {
 		return new JoinEventVO({
+			uuid: response.uuid,
 			nickname: response.displayName,
 			message: response.joinMessage,
 			createdAt: new Date()
