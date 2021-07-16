@@ -41,6 +41,10 @@ class PlayerEventVO {
 		return 'PlayerJoin';
 	}
 
+	static PlayerQuit() {
+		return 'PlayerQuit';
+	}
+
 	get uuid() {
 		return this._uuid;
 	}

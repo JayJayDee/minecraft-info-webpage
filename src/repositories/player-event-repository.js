@@ -27,7 +27,7 @@ class PlayerEventRepository {
 	/**
 	 * queries the events of the players
 	 * @param {*} uuid (Optional) player uuid
-	 * @Param {*} types (Optional) Array of 'PlayerChat' | 'PlayerJoin' | 'PlayerDeath'
+	 * @Param {*} types (Optional) Array of 'PlayerChat' | 'PlayerJoin' | 'PlayerDeath' | 'PlayerQuit'
 	 * @Param {*} take (Optional) number of element which you want
 	 * @Param {*} offset (Optional) offset of element which you want to fetch
 	 * @returns Array of PlayerEventVO instances
@@ -39,7 +39,7 @@ class PlayerEventRepository {
 		offset
 	} = {}) {
 		if (types && Array.isArray(types) === false) {
-			throw new Error('types must be Array of PlayerChat | PlayerJoin | PlayerDeath');
+			throw new Error('types must be Array of PlayerChat | PlayerJoin | PlayerDeath | PlayerQuit');
 		}
 		const rawRows = await this._userEventModel.findAll({
 			where: {

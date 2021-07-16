@@ -33,7 +33,10 @@ class PlayerEventProducer extends BaseEventProducer {
 				WellKnownTopics.JOIN(),
 				JoinEventVO.fromEventAPIResponse(payload)
 			);
-			
+
+		} else if (eventType === 'PlayerQuit') {
+			this._logger.info(payload);
+
 		} else {
 			this._logger.debug(`unknown eventType: ${eventType}, ignored`);
 		}

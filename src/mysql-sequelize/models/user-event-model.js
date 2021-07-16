@@ -9,7 +9,7 @@ const userEventModel = ({ sequelize, DataTypes, commonOpts }) =>
 		},
 
 		type: {
-			type: DataTypes.ENUM(['PlayerChat', 'PlayerDeath', 'PlayerJoin']),
+			type: DataTypes.ENUM(['PlayerChat', 'PlayerDeath', 'PlayerJoin', 'PlayerQuit']),
 			allowNull: false
 		},
 
