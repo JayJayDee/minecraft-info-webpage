@@ -8,6 +8,10 @@ class WellKnownTopics {
 		return 'player:death';
 	}
 
+	static JOIN() {
+		return 'player:join';
+	}
+
 	static TIME_HOURLY() {
 		return 'time:hourly';
 	}

@@ -1,6 +1,6 @@
 const { BaseEventProducer } = require('./base-event-producer');
 const { WellKnownTopics } = require('../well-known-topics');
-const { ChatEventVO, DeathEventVO } = require('./vo');
+const { ChatEventVO, DeathEventVO, JoinEventVO } = require('./vo');
 
 class PlayerEventProducer extends BaseEventProducer {
 
@@ -28,6 +28,12 @@ class PlayerEventProducer extends BaseEventProducer {
 				DeathEventVO.fromEventAPIResponse(payload)
 			);
 
+		} else if (eventType === 'PlayerJoin') {
+			this.eventBroker.publish(
+				WellKnownTopics.JOIN(),
+				JoinEventVO.fromEventAPIResponse(payload)
+			);
+			
 		} else {
 			this._logger.debug(`unknown eventType: ${eventType}, ignored`);
 		}
