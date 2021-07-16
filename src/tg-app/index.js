@@ -1,15 +1,36 @@
 const nodeTelegramBotApi = require('node-telegram-bot-api');
-
+const { getLogger } = require('../logger');
 const { getMcApiRequester } = require('../mc-api-requester');
+const { getEventBroker } = require('../event-broker');
+const { WellKnownTopics } = require('../well-known-topics');
 
 const initTelegramBot = (token, mcHost) => {
-    if(token === null) return null;
+    const logger = getLogger('telegram');
+    let bot = null;
 
-    // dependencies in your app
+    if(token === null) {
+        logger.info('Not found tg_token');
+        return null;
+    }
+
+    try {
+        bot = new nodeTelegramBotApi(token, {polling: true});
+    } catch(err) {
+        logger.error(err);
+        bot = null;
+    }
+
+    if(bot === null) return null;
+
     const mcApiRequester = getMcApiRequester();
+    const roomIds = [];
 
-    // app entry
-    const bot = new nodeTelegramBotApi(token, { polling: true });
+    bot.on('message', (msg) => {
+        const chatId = msg.chat.id;
+        if(roomIds.indexOf(chatId) < 0) {
+            roomIds.push(chatId);
+        }
+    });
 
     bot.onText(/\/cmd (:?)/, (msg) => {
         const arr = msg.text.split(' ');
@@ -34,6 +55,40 @@ const initTelegramBot = (token, mcHost) => {
 
         }
     });
+
+    const eventBroker = getEventBroker();
+    const sendMessage = (id, msg) => {
+        try{
+            bot.sendMessage(id, msg);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    eventBroker.subscribe(
+        WellKnownTopics.CHAT(),
+        (chatEventVO) => {
+           const name = chatEventVO.nickname();
+           const chat = chatEventVO.message();
+            roomIds.forEach(id => sendMessage(id, `[${name}] ${chat}`));
+        });
+
+    eventBroker.subscribe(
+        WellKnownTopics.JOIN(),
+        (joinEventVO) => {
+            const name = joinEventVO.nickname();
+            roomIds.forEach(id => sendMessage(id,  `[${name}] 입장 어서오고!`));
+        });
+
+    eventBroker.subscribe(
+        WellKnownTopics.DEATH(),
+        (deathEventVO) => {
+            const name = deathEventVO.nickname();
+            const chat = deathEventVO.message();
+            roomIds.forEach(id => sendMessage(id,  `${name}.... ${chat}`));
+        });
+
+    logger.info('telegram bot is ready');
 
     return bot;
 }
