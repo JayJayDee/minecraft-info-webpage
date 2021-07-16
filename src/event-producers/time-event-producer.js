@@ -22,6 +22,12 @@ class TimeEventProducer extends BaseEventProducer {
 				new HourlyEventVO({ createdAt: now })
 			);
 
+		} else if (eventType === 'HOURLY_AFTER_5MIN') {
+			this._eventBroker.publish(
+				WellKnownTopics.TIME_HOURLY_AFTER_5MIN(),
+				new HourlyEventVO({ createdAt: now })
+			);
+
 		} else if (eventType === 'MINUTELY') {
 			this._eventBroker.publish(
 				WellKnownTopics.TIME_EVERY_MINUTE(),

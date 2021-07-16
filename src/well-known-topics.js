@@ -16,6 +16,10 @@ class WellKnownTopics {
 		return 'time:hourly';
 	}
 
+	static TIME_HOURLY_AFTER_5MIN() {
+		return 'time:hourly-after-5min';
+	}
+
 	static TIME_EVERY_MINUTE() {
 		return 'time:every-minute';
 	}

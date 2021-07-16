@@ -22,6 +22,12 @@ const startCronjobTrigger = () => {
 				eventType: 'HOURLY'
 			}));
 
+		cron.schedule('5 * * * *', () =>
+			timeEventProducer.produce({
+				now: new Date(),
+				eventType: 'HOURLY_AFTER_5MIN'
+			}));
+
 		logger.info('cronjob trigger started');
 
 	} else {

@@ -33,8 +33,8 @@ Calling the initializer in module, not an initializer is not recommended. (maybe
 the `EventBroker` implementations allows to each modules to stream events from player's action. you can subscribe some topics that publishes event from producers.
 
 ## Usage roadmap
-- ~~the `CronJobApp` will be replaced with this `EventBroker` API, for time-related notifications.~~   -> Completed!
-- the `TgApp` will use the `EventBroker` for subscribe Player chats event
+- ~~the `CronJobApp` will be replaced with this `EventBroker` API, for time-related notifications.~~ - DONE
+- ~~the `TgApp` will use the `EventBroker` for subscribe Player chats event~~ - DONE
 
 ## Example
 ```javascript
@@ -61,8 +61,8 @@ for more example for `EventBroker` uses, see the following codes:
 - `WellKnownTopics.TIME_EVERY_MINUTE()` - every-minute event - `MinutelyEventVO` 
 
 # Roadmap
-- 플레이어 채팅 및 죽음 이벤트 로깅
-- 죽음 이벤트 발생시 서버 글로벌 무사고 n 시간 초기화 
-- 무사고 n시간은 매 시간 1분에 notify
+- ~~텔레그램으로 채팅 메시지 및 진입 이벤트 수신~~ DONE (by hwook)
+- ~~플레이어 채팅 및 죽음 이벤트 로깅~~ DONE (by JayJayDee)
+- ~~죽음 이벤트 발생시 서버 글로벌 무사고 n 시간 초기화, 무사고 n시간은 매 시간 1분에 notify~~ DONE (by JayJayDee)
 - 서버 전체 Daily backup 및 S3에 스냅샷 업로드 (5일치만 보관)
 - 업로드한 스냅샷 가져갈 수 있도록 수정

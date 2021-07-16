@@ -13,6 +13,7 @@ const { initEventProducers } = require('./event-producers');
 const { initMcApiRequester } = require('./mc-api-requester');
 const { initCronjobApp } = require('./cronjob-app');
 const { initPlayerEventRecorder } = require('./player-event-recorder');
+const { initAccidentFreeNotifier } = require('./accident-free-notifier');
 
 (async () => {
 	const log = getLogger('bootstrap');
@@ -36,8 +37,9 @@ const { initPlayerEventRecorder } = require('./player-event-recorder');
 		getConfiguration('TG_TOKEN'),
 		getConfiguration('MINECRAFT_REST_HOST')
 	);
+
 	initPlayerEventRecorder();
-	
+	initAccidentFreeNotifier();
 	startCronjobTrigger();
 
 	webserver.listen(port, () =>
