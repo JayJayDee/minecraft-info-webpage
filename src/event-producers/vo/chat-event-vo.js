@@ -41,7 +41,14 @@ class ChatEventVO {
 		} else if (playerEventVO.type === PlayerEventVO.PlayerJoin()) {
 			return new ChatEventVO({
 				nickname: 'SYSTEM',
-				message: `${playerEventVO.nickname}님이 입장하였습니다.`,
+				message: `${playerEventVO.nickname}님이 들어오셨습니다.`,
+				createdAt: playerEventVO.createdAt
+			});
+
+		} else if (playerEventVO.type === PlayerEventVO.PlayerQuit()) {
+			return new ChatEventVO({
+				nickname: 'SYSTEM',
+				message: `${playerEventVO.nickname}님이 나가셨습니다.`,
 				createdAt: playerEventVO.createdAt
 			});
 

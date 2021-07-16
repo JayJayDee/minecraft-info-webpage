@@ -39,15 +39,7 @@ class NotifyEveryHourJob extends BaseJob {
 
 	async execute() {
 		const message = `[SYSTEM] ${this._buildNotifyMessage()}`;
-		const url = `${this._minecraftRestHost}/v1/chat/broadcast`;
-		const params = new URLSearchParams();
-		params.append('message', message);
-
-		await axios.post(url, params, {
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			}
-		});
+		await this._mcApiRequester.requestBroadcast(message);
 	}
 }
 

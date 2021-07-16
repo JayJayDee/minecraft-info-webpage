@@ -56,7 +56,7 @@ class ServerStatusFetcher {
 		take
 	} = {}) {
 		const playerEvents = await this._userEventRepository.findPlayerEvents({
-			types: ['PlayerChat', 'PlayerJoin'],
+			types: ['PlayerChat', 'PlayerJoin', 'PlayerQuit'],
 			take: take ? take : 20
 		})
 		return playerEvents.map(ChatEventVO.fromPlayerEventVO);
