@@ -21,6 +21,7 @@ const initTelegramBot = (token, mcHost) => {
     }
 
     if(bot === null) return null;
+    logger.info('tgbot ready');
 
     const mcApiRequester = getMcApiRequester();
     const roomIds = [];
@@ -68,23 +69,23 @@ const initTelegramBot = (token, mcHost) => {
     eventBroker.subscribe(
         WellKnownTopics.CHAT(),
         (chatEventVO) => {
-            const name = chatEventVO.nickname();
-            const chat = chatEventVO.message();
+            const name = chatEventVO.nickname;
+            const chat = chatEventVO.message;
             roomIds.forEach(id => sendMessage(id, `[${name}] ${chat}`));
         });
 
     eventBroker.subscribe(
         WellKnownTopics.JOIN(),
         (joinEventVO) => {
-            const name = joinEventVO.nickname();
+            const name = joinEventVO.nickname;
             roomIds.forEach(id => sendMessage(id,  `[${name}] 입장 어서오고!`));
         });
 
     eventBroker.subscribe(
         WellKnownTopics.DEATH(),
         (deathEventVO) => {
-            const name = deathEventVO.nickname();
-            const message = deathEventVO.message();
+            const name = deathEventVO.nickname;
+            const message = deathEventVO.message;
             roomIds.forEach(id => sendMessage(id,  `${name}.... ${message}`));
         });
 
