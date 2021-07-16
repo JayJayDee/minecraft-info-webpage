@@ -13,7 +13,7 @@ class PlayerEventProducer extends BaseEventProducer {
 		this._logger = logger;
 	}
 
-	handleEvent(payload) {
+	produce(payload) {
 		const { eventType } = payload;
 
 		if (eventType === 'PlayerChat') {

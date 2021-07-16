@@ -1,6 +1,7 @@
 
 class BaseJob {
 	execute() {}
+	topicName() {}
 }
 
 module.exports = {

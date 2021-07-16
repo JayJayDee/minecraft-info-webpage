@@ -1,5 +1,6 @@
 const { getConfiguration } = require('../configurator');
 const { getLogger } = require('../logger');
+const { getMcApiRequester } = require('../mc-api-requester');
 const { getSequelizeModel } = require('../mysql-sequelize');
 const { PlayerEventRepository } = require('./player-event-repository');
 const { ServerStatusRepository } = require('./server-status-repository');
@@ -14,9 +15,9 @@ const repositoryStore = {
 const initRepositories = (repoStore = repositoryStore) => {
 	const logger = getLogger('repository');
 
-	const minecraftRestHost = getConfiguration('MINECRAFT_REST_HOST');
+	const mcApiRequester = getMcApiRequester();
 	repoStore.ServerStatusRepository = new ServerStatusRepository({
-		minecraftRestHost
+		mcApiRequester
 	});
 
 	const userPlaytimeModel = getSequelizeModel('UserPlaytimeModel');

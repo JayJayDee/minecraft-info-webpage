@@ -1,6 +1,6 @@
+const { WellKnownTopics } = require('../well-known-topics');
 const { BaseEventProducer } = require('./base-event-producer');
-const { HourlyEventVO } = require('./vo/hourly-event-vo');
-const { MinutelyEventVO } = require('./vo/minutely-event-vo');
+const { HourlyEventVO, MinutelyEventVO } = require('./vo');
 
 class TimeEventProducer extends BaseEventProducer {
 
@@ -13,18 +13,20 @@ class TimeEventProducer extends BaseEventProducer {
 		this._logger = logger;
 	}
 	
-	handleEvent(payload) {
+	produce(payload) {
 		const { now, eventType } = payload;
 
 		if (eventType === 'HOURLY') {
-			return new HourlyEventVO({
-				createdAt: now
-			});
+			this._eventBroker.publish(
+				WellKnownTopics.TIME_HOURLY(),
+				new HourlyEventVO({ createdAt: now })
+			);
 
 		} else if (eventType === 'MINUTELY') {
-			return new MinutelyEventVO({
-				createdAt: now
-			});
+			this._eventBroker.publish(
+				WellKnownTopics.TIME_EVERY_MINUTE(),
+				new MinutelyEventVO({ createdAt: now })
+			);
 
 		} else {
 			this._logger.debug(`unknown eventType: ${eventType}, ignored`);

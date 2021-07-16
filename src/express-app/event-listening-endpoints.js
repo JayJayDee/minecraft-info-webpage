@@ -12,7 +12,7 @@ const eventListeningRouter = ({
 		getMiddleware('EventListenAuth'),
 		async (req, res) => {
 			const eventProducer = getEventProducer('PlayerEvent');
-			eventProducer.handleEvent(req.body);
+			eventProducer.produce(req.body);
 			res.status(200).json({});
 		}
 	]);

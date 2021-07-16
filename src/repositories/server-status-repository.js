@@ -1,29 +1,27 @@
-const axios = require('axios');
-
 const { ServerPlayerVO } = require('./vo/server-player');
 
 class ServerStatusRepository {
 
 	constructor({
-		minecraftRestHost
+		mcApiRequester
 	}) {
-		this._minecraftRestHost = minecraftRestHost;
+		this._mcApiRequester = mcApiRequester;
 	}
 
 	async findAllPlayers() {
-		const url = `${this._minecraftRestHost}/v1/players/all`;
-		const body = await axios.get(url);
-		if (body.data) {
-			return body.data.map(ServerPlayerVO.fromSeverResponseElement);
+		const allPlayersRaw = await this._mcApiRequester.requestAllPlayers();
+		if (!allPlayersRaw) {
+			return [];
 		}
+		return allPlayersRaw.map(ServerPlayerVO.fromSeverResponseElement);
 	}
 
 	async findOnlinePlayers() {
-		const url = `${this._minecraftRestHost}/v1/players`;
-		const body = await axios.get(url);
-		if (body.data) {
-			return body.data.map(ServerPlayerVO.fromSeverResponseElement);
+		const onlinePlayersRaw = await this._mcApiRequester.requestOnlinePlayers();
+		if (!onlinePlayersRaw) {
+			return [];
 		}
+		return onlinePlayersRaw.map(ServerPlayerVO.fromSeverResponseElement);
 	}
 }
 

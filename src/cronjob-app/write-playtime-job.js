@@ -1,3 +1,4 @@
+const { WellKnownTopics } = require('../well-known-topics');
 const { BaseJob } = require('./base-job');
 
 class WritePlaytimeJob extends BaseJob {
@@ -11,6 +12,10 @@ class WritePlaytimeJob extends BaseJob {
 		this._userPlaytimeRepository = userPlaytimeRepository;
 		this._serverStatusRepository = serverStatusRepository;
 		this._logger = logger;
+	}
+
+	topicName() {
+		return WellKnownTopics.TIME_EVERY_MINUTE();
 	}
 
 	async execute() {

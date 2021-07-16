@@ -1,15 +1,15 @@
-const axios = require('axios');
 const { DateTime } = require('luxon');
+const { WellKnownTopics } = require('../well-known-topics');
 
 const { BaseJob } = require('./base-job');
 
 class NotifyEveryHourJob extends BaseJob {
 
 	constructor({
-		minecraftRestHost
+		mcApiRequester
 	}) {
 		super();
-		this._minecraftRestHost = minecraftRestHost;
+		this._mcApiRequester = mcApiRequester;
 	}
 
 	_buildNotifyMessage() {
@@ -31,6 +31,10 @@ class NotifyEveryHourJob extends BaseJob {
 			return '밤 11시입니다. 슬슬 마크 끄고 이닦고 잘준비좀 하시죠';
 		}
 		return `현실세계는 지금 ${kstHour}시 입니다.`;
+	}
+
+	topicName() {
+		return WellKnownTopics.TIME_HOURLY();
 	}
 
 	async execute() {
