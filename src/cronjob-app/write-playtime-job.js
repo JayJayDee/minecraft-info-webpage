@@ -21,7 +21,6 @@ class WritePlaytimeJob extends BaseJob {
 	async execute() {
 		const onlinePlayers = await this._serverStatusRepository.findOnlinePlayers();
 		const updatedPlayers = await this._userPlaytimeRepository.recordPlaytime(onlinePlayers);
-		this._logger.debug(`playtime updated, numPlayers: ${updatedPlayers.length}`);
 	}
 }
 

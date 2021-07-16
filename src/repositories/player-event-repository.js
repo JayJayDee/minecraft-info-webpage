@@ -2,9 +2,11 @@
 class PlayerEventRepository {
 
 	constructor({
-		logger
+		logger,
+		userEventModel
 	}) {
 		this._logger = logger;
+		this._userEventModel = userEventModel;
 	}
 
 	/**
@@ -12,7 +14,13 @@ class PlayerEventRepository {
 	 * @param {*} playerEvent instance of PlayerEventVO
 	 */
 	async insertPlayerEvent(playerEvent) {
-		// TODO: do something
+		const created = this._userEventModel.build({
+			type: playerEvent.type,
+			uuid: playerEvent.uuid,
+			nickname: playerEvent.nickname,
+			message: playerEvent.message
+		});
+		await created.save();
 	}
 
 	/**

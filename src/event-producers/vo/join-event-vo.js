@@ -1,6 +1,8 @@
 
 // {"player":{"uuid":"d8da487c-f51d-36d3-8f08-893175b8d8d5","displayName":"jaydee","address":"183.109.193.172","port":56731,"exhaustion":1.6915033,"exp":0.76923084,"whitelisted":false,"banned":false,"op":false},"joinMessage":"§ejaydee joined the game","eventType":"PlayerJoin"}
 
+const { PlayerEventVO } = require('../../repositories/vo/player-event-vo');
+
 class JoinEventVO {
 
 	constructor({
@@ -21,8 +23,8 @@ class JoinEventVO {
 
 	static fromEventAPIResponse(response) {
 		return new JoinEventVO({
-			uuid: response.uuid,
-			nickname: response.displayName,
+			uuid: response.player.uuid,
+			nickname: response.player.displayName,
 			message: response.joinMessage,
 			createdAt: new Date()
 		});
@@ -42,6 +44,16 @@ class JoinEventVO {
 
 	get createdAt() {
 		return this._createdAt;
+	}
+
+	toPlayerEventVO() {
+		return new PlayerEventVO({
+			uuid: this._uuid,
+			nickname: this._nickname,
+			type: PlayerEventVO.PlayerJoin(),
+			message: this._deathMessage,
+			createdAt: this._createdAt
+		});
 	}
 }
 

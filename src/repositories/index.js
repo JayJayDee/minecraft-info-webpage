@@ -22,6 +22,8 @@ const initRepositories = (repoStore = repositoryStore) => {
 
 	const userPlaytimeModel = getSequelizeModel('UserPlaytimeModel');
 	const sequelizeInstance = getSequelizeModel('sequelize');
+	const userEventModel = getSequelizeModel('UserEventModel');
+
 	repoStore.UserPlaytimeRepository = new UserPlaytimeRepository({
 		userPlaytimeModel,
 		sequelizeInstance,
@@ -29,6 +31,7 @@ const initRepositories = (repoStore = repositoryStore) => {
 	});
 
 	repoStore.PlayerEventRepository = new PlayerEventRepository({
+		userEventModel,
 		logger: getLogger('playerEventRepository')
 	});
 

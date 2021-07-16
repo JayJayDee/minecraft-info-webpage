@@ -33,21 +33,29 @@ Calling the initializer in module, not an initializer is not recommended. (maybe
 the `EventBroker` implementations allows to each modules to stream events from player's action. you can subscribe some topics that publishes event from producers.
 
 ## Usage roadmap
-- the `CronJobApp` will be replaced with this `EventBroker` API, for time-related notifications.
+- ~~the `CronJobApp` will be replaced with this `EventBroker` API, for time-related notifications.~~   -> Completed!
 - the `TgApp` will use the `EventBroker` for subscribe Player chats event
 
 ## Example
 ```javascript
+const { WellKnownTopics } = require('../well-known-topics');
 const broker = getEventBroker();
-const topic = 'chat-stream';
 
-const subscriptionId = broker.subscribe(topic, (payload) => {
-	// do something with payload
-});
+const subscriptionId =
+	broker.subscribe(WellKnownTopics.CHAT(), (payload) => {
+		// do something with payload
+	});
 
 // use your subscriptionId for unsubscribe()
 broker.unsubscribe(subscriptionId);
 ```
+
+## Well-known topics
+- `WellKnownTopics.CHAT()` - Player chat event - `ChatEventVO`
+- `WellKnownTopics.DEATH()` - Player death event - `DeathEventVO`
+- `WellKnownTopics.JOIN()` - Player join event - `JoinEventVO` 
+- `WellKnownTopics.TIME_HOURLY()` - Hourly event - `HourlyEventVO` 
+- `WellKnownTopics.TIME_EVERY_MINUTE()` - every-minute event - `MinutelyEventVO` 
 
 # Roadmap
 - 플레이어 채팅 및 죽음 이벤트 로깅

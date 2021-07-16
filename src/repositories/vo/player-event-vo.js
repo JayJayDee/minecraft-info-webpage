@@ -19,12 +19,28 @@ class PlayerEventVO {
 		}
 	}
 
+	static PlayerChat() {
+		return 'PlayerChat';
+	}
+
+	static PlayerDeath() {
+		return 'PlayerDeath';
+	}
+
+	static PlayerJoin() {
+		return 'PlayerJoin';
+	}
+
 	get uuid() {
 		return this._uuid;
 	}
 
 	get nickname() {
 		return this._nickname;
+	}
+
+	get message() {
+		return this._message;
 	}
 
 	get type() {

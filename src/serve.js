@@ -12,6 +12,7 @@ const { initTelegramBot } = require('./tg-app');
 const { initEventProducers } = require('./event-producers');
 const { initMcApiRequester } = require('./mc-api-requester');
 const { initCronjobApp } = require('./cronjob-app');
+const { initPlayerEventRecorder } = require('./player-event-recorder');
 
 (async () => {
 	const log = getLogger('bootstrap');
@@ -35,6 +36,8 @@ const { initCronjobApp } = require('./cronjob-app');
 		getConfiguration('TG_TOKEN'),
 		getConfiguration('MINECRAFT_REST_HOST')
 	);
+	initPlayerEventRecorder();
+	
 	startCronjobTrigger();
 
 	webserver.listen(port, () =>

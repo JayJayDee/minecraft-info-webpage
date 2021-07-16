@@ -29,7 +29,7 @@ class PlayerEventProducer extends BaseEventProducer {
 			);
 
 		} else if (eventType === 'PlayerJoin') {
-			this.eventBroker.publish(
+			this._eventBroker.publish(
 				WellKnownTopics.JOIN(),
 				JoinEventVO.fromEventAPIResponse(payload)
 			);

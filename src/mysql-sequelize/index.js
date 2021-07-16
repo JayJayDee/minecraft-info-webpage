@@ -2,10 +2,11 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 const { getConfiguration } = require('../configurator');
 const { getLogger } = require('../logger');
-const { userPlaytimeModel } = require('./models');
+const { userPlaytimeModel, userEventModel } = require('./models');
 
 const modelInstancesStore = {
 	UserPlaytimeModel: null,
+	UserEventModel: null,
 	sequelize: null
 };
 
@@ -31,6 +32,11 @@ const initSequelizeModels = async (store = modelInstancesStore) => {
 
 	store.sequelize = sequelize;
 	store.UserPlaytimeModel = userPlaytimeModel({
+		sequelize,
+		DataTypes,
+		commonOpts
+	});
+	store.UserEventModel = userEventModel({
 		sequelize,
 		DataTypes,
 		commonOpts

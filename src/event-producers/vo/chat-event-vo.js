@@ -1,6 +1,8 @@
 
 // {"playerName":"Gllory","message":"밑에 한칸 나두고 캐는거","eventType":"PlayerChat"}
 
+const { PlayerEventVO } = require('../../repositories/vo/player-event-vo');
+
 class ChatEventVO {
 
 	constructor({
@@ -41,6 +43,16 @@ class ChatEventVO {
 
 	get createdAt() {
 		return this._createdAt;
+	}
+
+	toPlayerEventVO() {
+		return new PlayerEventVO({
+			uuid: this._uuid,
+			nickname: this._nickname,
+			type: PlayerEventVO.PlayerChat(),
+			message: this._message,
+			createdAt: this._createdAt
+		});
 	}
 }
 
