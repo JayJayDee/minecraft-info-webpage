@@ -70,6 +70,7 @@ const initTelegramBot = (token, mcHost) => {
     eventBroker.subscribe(
         WellKnownTopics.CHAT(),
         (chatEventVO) => {
+            logger.debug('tg-app/chat-event', chatEventVO);
             const name = chatEventVO.nickname;
             const chat = chatEventVO.message;
             roomIds.forEach(id => sendMessage(id, `[${name}] ${chat}`));
@@ -78,6 +79,7 @@ const initTelegramBot = (token, mcHost) => {
     eventBroker.subscribe(
         WellKnownTopics.JOIN(),
         (joinEventVO) => {
+            logger.debug('tg-app/join-event', joinEventVO);
             const name = joinEventVO.nickname;
             roomIds.forEach(id => sendMessage(id,  `[${name}] 입장 어서오고!`));
         });
@@ -85,6 +87,7 @@ const initTelegramBot = (token, mcHost) => {
     eventBroker.subscribe(
         WellKnownTopics.DEATH(),
         (deathEventVO) => {
+            logger.debug('tg-app/death-event', deathEventVO);
             const name = deathEventVO.nickname;
             const message = deathEventVO.deathMessage;
             roomIds.forEach(id => sendMessage(id,  `[사망][${name}]... ${message}`));
