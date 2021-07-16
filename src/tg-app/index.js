@@ -45,7 +45,8 @@ const initTelegramBot = (token, mcHost) => {
 
     bot.onText(/\/tell (:?)/, (msg) => {
         try{
-            const name = `${msg.from.last_name} ${msg.from.first_name}`
+            let name = msg.from.last_name ? msg.from.last_name + ' ' : '';
+            name += msg.from.first_name ? msg.from.first_name: '';
             const arr = msg.text.split(' ');
             if(arr.length > 1 && typeof (arr[1]) === 'string') {
                 const tgMsg = msg.text.replace('/tell', `[${name}]`);
@@ -85,8 +86,8 @@ const initTelegramBot = (token, mcHost) => {
         WellKnownTopics.DEATH(),
         (deathEventVO) => {
             const name = deathEventVO.nickname;
-            const message = deathEventVO.message;
-            roomIds.forEach(id => sendMessage(id,  `${name}.... ${message}`));
+            const message = deathEventVO.deathMessage;
+            roomIds.forEach(id => sendMessage(id,  `[사망][${name}]... ${message}`));
         });
 
     logger.info('telegram bot is ready');
