@@ -7,9 +7,9 @@ const { getLogger } = require('../logger');
 const startCronjobTrigger = () => {
 	const logger = getLogger('cronjob-trigger');
 	const timeEventProducer = getEventProducer('TimeEvent');
-	const disableCronjob = getConfiguration('DISABLE_CRONJOB');
+	const enableCronjob = getConfiguration('ENABLE_EVENT_RECORDER');
 
-	if (!disableCronjob) {
+	if (enableCronjob) {
 		cron.schedule('* * * * *', () =>
 			timeEventProducer.produce({
 				now: new Date(),
@@ -28,10 +28,10 @@ const startCronjobTrigger = () => {
 				eventType: 'HOURLY_AFTER_5MIN'
 			}));
 
-		logger.info('cronjob trigger started');
+		logger.info('cronjob-trigger is enabled and ready');
 
 	} else {
-		logger.info('cronjob trigger disabled, cause -> DISABLE_CRONJOB=true');
+		logger.info('cronjob-trigger is DISABLED  -> ENABLE_CRONTAB_TRIGGER env-variable is not set');
 	}
 };
 

@@ -12,7 +12,6 @@ MYSQL_PORT=3306
 MYSQL_USER=****
 MYSQL_PASSWORD=***
 MYSQL_DATABASE=***
-DISABLE_CRONJOB=true
 ENABLE_MOCK_STATUS_FETCHER=true
 ```
 then, you can run the project with following command.

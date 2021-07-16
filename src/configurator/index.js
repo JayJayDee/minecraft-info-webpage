@@ -23,10 +23,11 @@ const configurationStore = {
 	MYSQL_USER: null,
 	MYSQL_PASSWORD: null,
 	MYSQL_DATABASE: null,
-	DISABLE_CRONJOB: null,
-	ENABLE_MOCK_STATUS_FETCHER: null,
 	TG_TOKEN: null,
-	EVENT_LISTENING_KEY: null
+	EVENT_LISTENING_KEY: null,
+	ENABLE_MOCK_STATUS_FETCHER: null,
+	ENABLE_CRONTAB_TRIGGER: null,
+	ENABLE_EVENT_RECORDER: null
 };
 
 const initConfigurations = (store = configurationStore) => {
@@ -37,10 +38,12 @@ const initConfigurations = (store = configurationStore) => {
 	store.MYSQL_USER = loadMandatory('MYSQL_USER');
 	store.MYSQL_PASSWORD = loadMandatory('MYSQL_PASSWORD');
 	store.MYSQL_DATABASE = loadMandatory('MYSQL_DATABASE');
-	store.DISABLE_CRONJOB = loadOptional('DISABLE_CRONJOB', null);
-	store.ENABLE_MOCK_STATUS_FETCHER = loadOptional('ENABLE_MOCK_STATUS_FETCHER', null);
 	store.TG_TOKEN = loadOptional('TG_TOKEN', null);
+
 	store.EVENT_LISTENING_KEY = loadOptional('EVENT_LISTENING_KEY', null);
+	store.ENABLE_MOCK_STATUS_FETCHER = loadOptional('ENABLE_MOCK_STATUS_FETCHER', null);
+	store.ENABLE_CRONTAB_TRIGGER = loadOptional('ENABLE_CRONTAB_TRIGGER', null);
+	store.ENABLE_EVENT_RECORDER = loadOptional('ENABLE_EVENT_RECORDER', null);
 };
 
 const getConfiguration = (key, store = configurationStore) => {
