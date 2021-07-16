@@ -1,9 +1,14 @@
 const nodeTelegramBotApi = require('node-telegram-bot-api');
-const axios = require('axios');
+
+const { getMcApiRequester } = require('../mc-api-requester');
 
 const initTelegramBot = (token, mcHost) => {
     if(token === null) return null;
 
+    // dependencies in your app
+    const mcApiRequester = getMcApiRequester();
+
+    // app entry
     const bot = new nodeTelegramBotApi(token, { polling: true });
 
     bot.onText(/\/cmd (:?)/, (msg) => {
@@ -22,17 +27,7 @@ const initTelegramBot = (token, mcHost) => {
             const arr = msg.text.split(' ');
             if(arr.length > 1 && typeof (arr[1]) === 'string') {
                 const tgMsg = msg.text.replace('/tell', `[${name}]`);
-                const url = `${mcHost}/v1/chat/broadcast`;
-                const params = new URLSearchParams();
-                params.append('message', tgMsg);
-                axios.post(url,params,
-                    {
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            'accept': 'application/json'
-                        }
-                    }
-                );
+                mcApiRequester.requestBroadcast(tgMsg);
             }
         } catch(err) {
             bot.sendMessage(msg.chat.id, '메세지 전송 실패');
