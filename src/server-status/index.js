@@ -21,10 +21,12 @@ const initServerStatusModules = (modStore = moduleStore) => {
 
 	const serverStatusRepository = getRepository('ServerStatusRepository');
 	const userPlaytimeRepository = getRepository('UserPlaytimeRepository');
+	const userEventRepository = getRepository('PlayerEventRepository');
 
 	modStore.ServerStatusFetcher = new ServerStatusFetcher({
 		serverStatusRepository,
 		userPlaytimeRepository,
+		userEventRepository,
 		logger
 	});
 	logger.info('serverStatusFetcher is ready');

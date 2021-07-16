@@ -55,6 +55,19 @@ const pageEndpointsRouter = () => {
 		}
 	]);
 
+	router.get('/chats', [
+		getMiddleware('ServerStatus'),
+		async (req, res) => {
+			const statusFetcher = getServerStatusModule('ServerStatusFetcher');
+			const chats = await statusFetcher.latestChats({ take: 20 });
+
+			res.render('chats', {
+				... req.serverStatus,
+				chats
+			});
+		}
+	]);
+
 	router.get('/guide', [
 		getMiddleware('ServerStatus'),
 		async (req, res) =>

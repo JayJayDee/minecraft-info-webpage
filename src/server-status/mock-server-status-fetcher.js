@@ -16,6 +16,15 @@ class MockServerStatusFetcher {
 		}
 		return [];
 	}
+
+	async latestChats({
+		take
+	} = {}) {
+		if (take === undefined) {
+			return [];
+		}
+		return [];
+	}
 }
 
 module.exports = { 

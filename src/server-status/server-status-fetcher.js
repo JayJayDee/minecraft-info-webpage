@@ -5,10 +5,12 @@ class ServerStatusFetcher {
 	constructor({
 		serverStatusRepository,
 		userPlaytimeRepository,
+		userEventRepository,
 		logger
 	}) {
 		this._serverStatusRepo = serverStatusRepository,
 		this._userPlaytimeRepository = userPlaytimeRepository;
+		this._userEventRepository = userEventRepository;
 		this._logger = logger;
 	}
 
@@ -47,6 +49,16 @@ class ServerStatusFetcher {
 			return sorted;
 		}
 		return sorted.slice(0, take);
+	}
+
+	async latestChats({
+		take
+	} = {}) {
+		const chatEvents = this._userEventRepository.findPlayerEvents({
+			types: ['PlayerChat', 'PlayerJoin'],
+			take: take ? take : 20
+		})
+		return chatEvents;
 	}
 }
 

@@ -19,6 +19,16 @@ class PlayerEventVO {
 		}
 	}
 
+	static fromDBResponseElement(element) {
+		return new PlayerEventVO({
+			uuid: element.uuid,
+			type: element.type,
+			message: element.message,
+			nickname: element.nickname,
+			createdAt: element.createdAt
+		});
+	}
+
 	static PlayerChat() {
 		return 'PlayerChat';
 	}

@@ -1,3 +1,4 @@
+const { PlayerEventVO } = require("./vo/player-event-vo");
 
 class PlayerEventRepository {
 
@@ -26,15 +27,32 @@ class PlayerEventRepository {
 	/**
 	 * queries the events of the players
 	 * @param {*} uuid (Optional) player uuid
-	 * @Param {*} type (Optional) 'DEATH' | 'CHAT' | 'LOGIN' | 'LOGOUT'
+	 * @Param {*} types (Optional) Array of 'PlayerChat' | 'PlayerJoin' | 'PlayerDeath'
+	 * @Param {*} take (Optional) number of element which you want
+	 * @Param {*} offset (Optional) offset of element which you want to fetch
 	 * @returns Array of PlayerEventVO instances
 	 */
 	async findPlayerEvents({
 		uuid,
-		type
+		types,
+		take,
+		offset
 	} = {}) {
-		// TODO: do something
-		return [];
+		if (types && Array.isArray(types) === false) {
+			throw new Error('types must be Array of PlayerChat | PlayerJoin | PlayerDeath');
+		}
+		const rawRows = await this._userEventModel.findAll({
+			where: {
+				... uuid ? { uuid } : {},
+				... types ? { type: types } : {},
+			},
+			... offset ? { offset } : {},
+			... take ? { limit: take } : {},
+			order: [
+				['id', 'DESC']
+			]
+		});
+		return rawRows.map(PlayerEventVO.fromDBResponseElement);
 	}
 }
 
