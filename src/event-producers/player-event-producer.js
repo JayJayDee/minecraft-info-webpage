@@ -1,6 +1,6 @@
 const { BaseEventProducer } = require('./base-event-producer');
 const { WellKnownTopics } = require('../well-known-topics');
-const { ChatEventVO, DeathEventVO, JoinEventVO } = require('./vo');
+const { ChatEventVO, DeathEventVO, JoinEventVO, QuitEventVO } = require('./vo');
 
 class PlayerEventProducer extends BaseEventProducer {
 
@@ -35,7 +35,10 @@ class PlayerEventProducer extends BaseEventProducer {
 			);
 
 		} else if (eventType === 'PlayerQuit') {
-			this._logger.info(payload);
+			this._eventBroker.publish(
+				WellKnownTopics.QUIT(),
+				QuitEventVO.fromEventAPIResponse(payload)
+			);
 
 		} else {
 			this._logger.debug(`unknown eventType: ${eventType}, ignored`);

@@ -12,6 +12,10 @@ class WellKnownTopics {
 		return 'player:join';
 	}
 
+	static QUIT() {
+		return 'player:quit';
+	}
+
 	static TIME_HOURLY() {
 		return 'time:hourly';
 	}

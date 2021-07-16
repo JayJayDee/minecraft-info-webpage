@@ -34,6 +34,14 @@ const initPlayerEventRecorder = () => {
 				playerEventRepository.insertPlayerEvent(
 					deathEventVO.toPlayerEventVO()
 				));
+
+		// 클라이언트 종료 이벤트 subscribe
+		eventBroker.subscribe(
+			WellKnownTopics.QUIT(),
+			(quitEventVO) =>
+				playerEventRepository.insertPlayerEvent(
+					quitEventVO.toPlayerEventVO()
+				));
 		logger.info('playerEventRecorder is enabled and ready');
 
 	} else {

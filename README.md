@@ -56,6 +56,7 @@ for more example for `EventBroker` uses, see the following codes:
 - `WellKnownTopics.CHAT()` - Player chat event - `ChatEventVO`
 - `WellKnownTopics.DEATH()` - Player death event - `DeathEventVO`
 - `WellKnownTopics.JOIN()` - Player join event - `JoinEventVO` 
+- `WellKnownTopics.QUIT()` - Player quit event - `QuitEventVO`
 - `WellKnownTopics.TIME_HOURLY()` - Hourly event - `HourlyEventVO` 
 - `WellKnownTopics.TIME_EVERY_MINUTE()` - every-minute event - `MinutelyEventVO` 
 
