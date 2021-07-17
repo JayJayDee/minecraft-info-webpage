@@ -1,4 +1,4 @@
-const { PlayerEventVO } = require("./vo/player-event-vo");
+const { PlayerEventVO } = require('./vo/player-event-vo');
 
 class PlayerEventRepository {
 

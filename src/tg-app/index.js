@@ -3,6 +3,8 @@ const { getLogger } = require('../logger');
 const { getMcApiRequester } = require('../mc-api-requester');
 const { getEventBroker } = require('../event-broker');
 const { WellKnownTopics } = require('../well-known-topics');
+const { getRepository } = require('../repositories');
+const { PlayerEventVO } = require('../repositories/vo/player-event-vo');
 
 const initTelegramBot = (token, mcHost) => {
     const logger = getLogger('telegram');
@@ -24,6 +26,7 @@ const initTelegramBot = (token, mcHost) => {
     logger.info('tgbot ready');
 
     const mcApiRequester = getMcApiRequester();
+    const userEventRepository = getRepository('PlayerEventRepository');
     const roomIds = [];
 
     bot.on('message', (msg) => {
@@ -49,12 +52,20 @@ const initTelegramBot = (token, mcHost) => {
             name += msg.from.first_name ? msg.from.first_name: '';
             const arr = msg.text.split(' ');
             if(arr.length > 1 && typeof (arr[1]) === 'string') {
+                userEventRepository.insertPlayerEvent(
+                    new PlayerEventVO({
+                        nickname: `TG_${name}`,
+                        type: PlayerEventVO.PlayerChat(),
+                        message: msg.text.replace('/tell', '')
+                    })
+                );
+
                 const tgMsg = msg.text.replace('/tell', `[${name}]`);
                 mcApiRequester.requestBroadcast(tgMsg);
             }
+
         } catch(err) {
             bot.sendMessage(msg.chat.id, '메세지 전송 실패');
-
         }
     });
 
