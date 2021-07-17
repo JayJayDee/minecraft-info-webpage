@@ -17,6 +17,7 @@ const pageEndpointsRouter = () => {
 			const recentChats = await statusFetcher.latestChats({
 				take: 6
 			});
+			const latestDeath = await statusFetcher.latestDeathForMainScene();
 
 			const frontPictures= [
 				'carousel-01.png',
@@ -41,7 +42,8 @@ const pageEndpointsRouter = () => {
 				ghostsTop5,
 				recentChats,
 				catchphrase,
-				frontPicture
+				frontPicture,
+				latestDeath
 			});
 		}
 	]);

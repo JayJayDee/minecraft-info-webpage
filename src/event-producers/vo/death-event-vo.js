@@ -30,6 +30,15 @@ class DeathEventVO {
 		});
 	}
 
+	static fromPlayerEventVO(playerEventVO) {
+		return new DeathEventVO({
+			uuid: playerEventVO.uuid,
+			nickname: playerEventVO.nickname,
+			deathMessage: playerEventVO.message,
+			createdAt: playerEventVO.createdAt
+		});
+	}
+
 	get uuid() {
 		return this._uuid;
 	}
@@ -54,6 +63,15 @@ class DeathEventVO {
 			message: this._deathMessage,
 			createdAt: this._createdAt
 		});
+	}
+
+	lastDeathFromNowExpression() {
+		const diff = Math.floor((Date.now() - this._createdAt.getTime()) / 1000);
+		const recordExpr =
+			diff < 60 ? `${diff}초` :
+				diff < 3600 ? `${Math.floor(diff / 60)}분` :
+					`${Math.floor(diff / 3600)}시간`;
+		return recordExpr;
 	}
 }
 

@@ -25,6 +25,10 @@ class MockServerStatusFetcher {
 		}
 		return [];
 	}
+
+	async latestDeathForMainScene() {
+		return null;
+	}
 }
 
 module.exports = { 

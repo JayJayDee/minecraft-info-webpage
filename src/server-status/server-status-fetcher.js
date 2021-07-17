@@ -1,4 +1,4 @@
-const { ChatEventVO } = require('../event-producers/vo');
+const { ChatEventVO, DeathEventVO } = require('../event-producers/vo');
 const { PlaytimeVO } = require('../repositories/vo/playtime-vo');
 
 class ServerStatusFetcher {
@@ -60,6 +60,25 @@ class ServerStatusFetcher {
 			take: take ? take : 20
 		})
 		return playerEvents.map(ChatEventVO.fromPlayerEventVO);
+	}
+
+	async latestDeathForMainScene() {
+		const lastDeaths = await this._userEventRepository.findPlayerEvents({
+			types: [ 'PlayerDeath' ],
+			take: 1
+		});
+		if (lastDeaths.length === 0) {
+			return null;
+		}
+
+		const deathEventVO = DeathEventVO.fromPlayerEventVO(lastDeaths[0]);
+		const diffFromNow = Math.floor((Date.now() - deathEventVO.createdAt.getTime()) / 1000);
+
+		// 1시간이 
+		if (diffFromNow < 3600) {
+			return null;
+		}
+		return deathEventVO;
 	}
 }
 

@@ -16,6 +16,16 @@
 
 <div class="row g-5">
 
+  <% if (latestDeath) { %>
+  <div class="col-md-12">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>광산에서는 안전제일!</strong>
+      마지막 <%= latestDeath.nickname %>님의 사망사고 이후 무사고 <strong><%= latestDeath.lastDeathFromNowExpression() %></strong>째!
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+  <% } %>
+
   <div class="col-md-6">
     <h2>망령 TOP 5</h2>
     <p>이 서버에서 가장 많은 시간을 보낸 5명의 망령을 소개합니다. 자랑스럽네요.</p>
