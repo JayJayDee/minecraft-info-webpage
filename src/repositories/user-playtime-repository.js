@@ -62,7 +62,9 @@ class UserPlaytimeRepository {
 		uuid
 	} = {}) {
 		const allPlaytimeRecords = await this._userPlaytimeModel.findAll({
-			... uuid ? { uuid } : {}
+			where: {
+				... uuid ? { uuid } : {}
+			}
 		});
 		return allPlaytimeRecords.map(PlaytimeVO.fromDBResponseElement);
 	}

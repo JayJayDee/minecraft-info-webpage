@@ -13,7 +13,7 @@ const initPlayerJoinNotifier = () => {
 	eventBroker.subscribe(
 		WellKnownTopics.JOIN(),
 		async (joinEventVO) => {
-			logger.debug('received', joinEventVO.nickname);
+			logger.debug('received', joinEventVO);
 
 			// fetch user PlayTime record
 			const playTimeRecords =
@@ -28,10 +28,10 @@ const initPlayerJoinNotifier = () => {
 			let additionalMessage = '';
 			if (playTimeVO) {
 				const { hour, minute } = playTimeVO.getHourMin();
-				additionalMessage = `현재 플탐 ${hour}시간 ${minute}분 지리고`;
+				additionalMessage = `현재 플탐: ${hour}시간 ${minute}분`;
 			}
 			const message = 
-				`${joinEventVO.nickname} 어서오고 ${additionalMessage}`;
+				`${joinEventVO.nickname} 어서오고! ${additionalMessage}`;
 
 			// send welcome mesage to joined player
 			mcApiRequester.requestTell(
