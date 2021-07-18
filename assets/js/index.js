@@ -1,0 +1,1 @@
+(()=>{"use strict";new Swiper(".swiper-picture",{speed:1e3,autoplay:{delay:3e3},loop:!0,pagination:{el:".swiper-pagination"}}),new Swiper(".swiper-catchphrase",{allowTouchMove:!1,effect:"fade",speed:1e3,autoplay:{delay:3e3},loop:!0})})();
