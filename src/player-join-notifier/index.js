@@ -13,6 +13,8 @@ const initPlayerJoinNotifier = () => {
 	eventBroker.subscribe(
 		WellKnownTopics.JOIN(),
 		async (joinEventVO) => {
+			logger.debug('received', joinEventVO.nickname);
+
 			// fetch user PlayTime record
 			const playTimeRecords =
 				await userPlayTimeRepository.findPlaytimes({
