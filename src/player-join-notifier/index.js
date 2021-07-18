@@ -31,7 +31,7 @@ const initPlayerJoinNotifier = () => {
 				additionalMessage = `현재 플탐: ${hour}시간 ${minute}분`;
 			}
 			const message = 
-				`${joinEventVO.nickname} 어서오고! ${additionalMessage}`;
+				`${joinEventVO.nickname}님 어서오세요! ${additionalMessage}`;
 
 			// send welcome mesage to joined player
 			mcApiRequester.requestTell(
