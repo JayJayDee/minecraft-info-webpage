@@ -108,6 +108,15 @@ const pageEndpointsRouter = () => {
 			})
 	]);
 
+	router.use([
+		getMiddleware('ServerStatus'),
+		async (req, res) =>
+			res.render('error', {
+				... req.serverStatus,
+				message: `Page not found for resource: ${req.url}`
+			})
+	]);
+
 	return router;
 };
 
