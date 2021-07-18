@@ -1,6 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -13,13 +13,13 @@ module.exports = {
     plugins: [
         // 컴파일 + 번들링 CSS 파일이 저장될 경로와 이름 지정
         new MiniCssExtractPlugin({filename: '../css/[name].css'}),
-        new HtmlWebpackPlugin(
-            {
-                inject: false,
-                template: '!!raw-loader!' + path.resolve(__dirname, './views/index.ejs'),
-                filename: '../../src/views/index.ejs'
-            }
-        ),
+        // new HtmlWebpackPlugin(
+        //     {
+        //         inject: false,
+        //         template: '!!raw-loader!' + path.resolve(__dirname, './views/index.ejs'),
+        //         filename: '../../src/views/index.ejs'
+        //     }
+        // ),
     ],
     module: {
         rules: [
