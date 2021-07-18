@@ -7,6 +7,15 @@ class DefaultMinecraftAPIRequester {
 		this._minecraftRestHost = minecraftRestHost;
 	}
 
+	async requestWorlds() {
+		const url = `${this._minecraftRestHost}/v1/worlds`;
+		const body = await axios.get(url);
+		if (body.data) {
+			return body.data;
+		}
+		return null;
+	}
+
 	async requestAllPlayers() {
 		const url = `${this._minecraftRestHost}/v1/players/all`;
 		const body = await axios.get(url);
