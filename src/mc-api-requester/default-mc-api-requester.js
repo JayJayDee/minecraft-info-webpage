@@ -35,6 +35,18 @@ class DefaultMinecraftAPIRequester {
 			}
 		});
 	}
+
+	async requestTell(uuid, message) {
+		const url = `${this._minecraftRestHost}/v1/chat/tell`;
+		const params = new URLSearchParams();
+		params.append('message', message);
+		params.append('playerUuid', uuid);
+		await axios.post(url, params, {
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}
+		});
+	}
 }
 
 module.exports = {

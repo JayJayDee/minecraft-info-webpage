@@ -14,6 +14,7 @@ const { initMcApiRequester } = require('./mc-api-requester');
 const { initCronjobApp } = require('./cronjob-app');
 const { initPlayerEventRecorder } = require('./player-event-recorder');
 const { initAccidentFreeNotifier } = require('./accident-free-notifier');
+const { initPlayerJoinNotifier } = require('./player-join-notifier');
 
 (async () => {
 	const log = getLogger('bootstrap');
@@ -40,6 +41,7 @@ const { initAccidentFreeNotifier } = require('./accident-free-notifier');
 
 	initPlayerEventRecorder();
 	initAccidentFreeNotifier();
+	initPlayerJoinNotifier();
 	startCronjobTrigger();
 
 	webserver.listen(port, () =>

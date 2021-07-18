@@ -58,8 +58,12 @@ class UserPlaytimeRepository {
 		}
 	}
 
-	async findPlaytimes() {
-		const allPlaytimeRecords = await this._userPlaytimeModel.findAll({});
+	async findPlaytimes({
+		uuid
+	} = {}) {
+		const allPlaytimeRecords = await this._userPlaytimeModel.findAll({
+			... uuid ? { uuid } : {}
+		});
 		return allPlaytimeRecords.map(PlaytimeVO.fromDBResponseElement);
 	}
 }
