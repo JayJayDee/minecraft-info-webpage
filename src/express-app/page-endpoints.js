@@ -41,8 +41,8 @@ const pageEndpointsRouter = () => {
 				... req.serverStatus,
 				ghostsTop5,
 				recentChats,
-				catchphrase,
-				frontPicture,
+				catchphrases,
+				frontPictures,
 				latestDeath
 			});
 		}
