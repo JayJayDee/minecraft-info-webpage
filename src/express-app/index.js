@@ -1,7 +1,7 @@
 const express = require('express');
 const { join } = require('path');
 
-const { initMiddlewares } = require('./middlewares');
+const { initMiddlewares, getMiddleware } = require('./middlewares');
 const { pageEndpointsRouter } = require('./page-endpoints');
 const { eventListeningRouter } = require('./event-listening-endpoints');
 const { getLogger } = require('../logger');
@@ -18,6 +18,15 @@ const initExpressApp = () => {
 	app.use('/event', eventListeningRouter({
 		logger: getLogger('eventListener')
 	}));
+
+	app.use([
+		getMiddleware('ServerStatus'),
+		(req, res) =>
+			res.render('error', {
+				... req.serverStatus,
+				message: `requested resource not found : ${req.url}`
+			})
+	]);
 
 	return app;
 };
