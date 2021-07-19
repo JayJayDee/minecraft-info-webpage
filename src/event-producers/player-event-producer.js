@@ -20,12 +20,19 @@ class PlayerEventProducer extends BaseEventProducer {
 			payload.playerName ? payload.playerName :
 				payload.player.displayName ? payload.player.displayName : null;
 
+		// bot 종류 무시 -> // TODO: 이것도 별도 모듈로 관리하도록 수정
 		if (nickName && nickName.includes('-bot')) {
-			// bot 종류 무시
+			logger.debug(`-bot postfix nickname event ignored, ${nickName}`);
 			return;
 		}
 
 		if (eventType === 'PlayerChat') {
+			// 특정 플레이어 채팅 broadcast 차단 요청 -> // TODO: 이것도 별도 모듈로 관리하도록 수정
+			if (['bboloe', 'CCC', 'HEATHER'].includes(nickName)) {
+				logger.debug(`specific player chatting event ignored, ${nickName}`);
+				return;
+			}
+
 			this._eventBroker.publish(
 				WellKnownTopics.CHAT(),
 				ChatEventVO.fromEventAPIResponse(payload)
