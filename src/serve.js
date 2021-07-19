@@ -39,12 +39,15 @@ const { initSnapshotWorker } = require('./snapshot-worker');
 		getConfiguration('MINECRAFT_REST_HOST')
 	);
 
-	initSnapshotWorker();
-	initCronjobApp();
 	initPlayerEventRecorder();
-	initAccidentFreeNotifier();
 	initPlayerJoinNotifier();
-	startCronjobTrigger();
+
+	const { enabled } = startCronjobTrigger();
+	if (enabled) {
+		initSnapshotWorker();
+		initCronjobApp();
+		initAccidentFreeNotifier();
+	}
 
 	webserver.listen(port, () =>
 		log.info(`the webserver has been started, port: ${port}`)

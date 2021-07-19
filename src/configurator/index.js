@@ -28,7 +28,10 @@ const configurationStore = {
 	ENABLE_MOCK_STATUS_FETCHER: null,
 	ENABLE_CRONTAB_TRIGGER: null,
 	ENABLE_EVENT_RECORDER: null,
-	ENABLE_SNAPSHOT_WORKER: null
+	
+	SNAPSHOT_AWS_ACCESS_KEY_ID: null,
+	SNAPSHOT_AWS_SECRET_ACCESS_KEY: null,
+	SNAPSHOT_AWS_BUCKET_NAME: null
 };
 
 const initConfigurations = (store = configurationStore) => {
@@ -45,7 +48,10 @@ const initConfigurations = (store = configurationStore) => {
 	store.ENABLE_MOCK_STATUS_FETCHER = loadOptional('ENABLE_MOCK_STATUS_FETCHER', null);
 	store.ENABLE_CRONTAB_TRIGGER = loadOptional('ENABLE_CRONTAB_TRIGGER', null);
 	store.ENABLE_EVENT_RECORDER = loadOptional('ENABLE_EVENT_RECORDER', null);
-	store.ENABLE_SNAPSHOT_WORKER = loadOptional('ENABLE_SNAPSHOT_WORKER', null);
+
+	store.SNAPSHOT_AWS_ACCESS_KEY_ID = loadOptional('SNAPSHOT_AWS_ACCESS_KEY_ID', null);
+	store.SNAPSHOT_AWS_SECRET_ACCESS_KEY = loadOptional('SNAPSHOT_AWS_SECRET_ACCESS_KEY', null);
+	store.SNAPSHOT_AWS_BUCKET_NAME = loadOptional('SNAPSHOT_AWS_BUCKET_NAME', null);
 };
 
 const getConfiguration = (key, store = configurationStore) => {
