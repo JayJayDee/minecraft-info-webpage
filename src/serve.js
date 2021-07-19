@@ -34,10 +34,7 @@ const { initSnapshotWorker } = require('./snapshot-worker');
 	const port = getConfiguration('HTTP_PORT');
 	const webserver = initExpressApp();
 
-	initTelegramBot(
-		getConfiguration('TG_TOKEN'),
-		getConfiguration('MINECRAFT_REST_HOST')
-	);
+	initTelegramBot(getConfiguration('TG_TOKEN'));
 
 	initPlayerEventRecorder();
 	initPlayerJoinNotifier();

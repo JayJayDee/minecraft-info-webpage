@@ -12,8 +12,8 @@ const { initSnapshotWorker, getSnapshotWorker } = require('../snapshot-worker');
 
 	log.info('begin');
 
-	initMcApiRequester();
 	initConfigurations();
+	initMcApiRequester();
 	await initSequelizeModels();
 	initRepositories();
 	initSnapshotWorker();

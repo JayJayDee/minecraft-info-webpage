@@ -6,7 +6,7 @@ const { WellKnownTopics } = require('../well-known-topics');
 const { getRepository } = require('../repositories');
 const { PlayerEventVO } = require('../repositories/vo/player-event-vo');
 
-const initTelegramBot = (token, mcHost) => {
+const initTelegramBot = (token) => {
     const logger = getLogger('telegram');
     let bot = null;
 

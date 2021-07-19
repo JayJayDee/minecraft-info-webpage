@@ -31,7 +31,8 @@ const configurationStore = {
 	
 	SNAPSHOT_AWS_ACCESS_KEY_ID: null,
 	SNAPSHOT_AWS_SECRET_ACCESS_KEY: null,
-	SNAPSHOT_AWS_BUCKET_NAME: null
+	SNAPSHOT_AWS_BUCKET_NAME: null,
+	SNAPSHOT_MINECRAFT_PATH: null
 };
 
 const initConfigurations = (store = configurationStore) => {
@@ -52,6 +53,7 @@ const initConfigurations = (store = configurationStore) => {
 	store.SNAPSHOT_AWS_ACCESS_KEY_ID = loadOptional('SNAPSHOT_AWS_ACCESS_KEY_ID', null);
 	store.SNAPSHOT_AWS_SECRET_ACCESS_KEY = loadOptional('SNAPSHOT_AWS_SECRET_ACCESS_KEY', null);
 	store.SNAPSHOT_AWS_BUCKET_NAME = loadOptional('SNAPSHOT_AWS_BUCKET_NAME', null);
+	store.SNAPSHOT_MINECRAFT_PATH = loadOptional('SNAPSHOT_MINECRAFT_PATH', null);
 };
 
 const getConfiguration = (key, store = configurationStore) => {

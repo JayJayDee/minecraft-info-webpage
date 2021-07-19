@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/JayJayDee/minecraft-info-webpage#readme",
   "dependencies": {
+    "archiver": "^5.3.0",
     "aws-sdk": "^2.948.0",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
@@ -30,10 +31,10 @@
     "luxon": "^1.28.0",
     "mysql2": "^2.2.5",
     "nanoid": "^3.1.23",
-    "node-7z": "^3.0.0",
     "node-cron": "^3.0.0",
     "node-telegram-bot-api": "^0.40.0",
     "s3-upload-stream": "^1.0.7",
-    "sequelize": "^6.6.5"
+    "sequelize": "^6.6.5",
+    "zlib": "^1.0.5"
   }
 }
