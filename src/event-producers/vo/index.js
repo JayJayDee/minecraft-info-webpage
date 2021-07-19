@@ -5,6 +5,7 @@ const { JoinEventVO } = require('./join-event-vo');
 const { QuitEventVO } = require('./quit-event-vo');
 const { HourlyEventVO } = require('./hourly-event-vo');
 const { MinutelyEventVO } = require('./minutely-event-vo');
+const { DailyEventVO } = require('./daily-event-vo');
 
 module.exports = {
 	ChatEventVO,
@@ -12,5 +13,6 @@ module.exports = {
 	JoinEventVO,
 	QuitEventVO,
 	HourlyEventVO,
-	MinutelyEventVO
+	MinutelyEventVO,
+	DailyEventVO
 };

@@ -2,7 +2,9 @@ const { getEventBroker } = require('../event-broker');
 const { getLogger } = require('../logger');
 const { getMcApiRequester } = require('../mc-api-requester');
 const { getRepository } = require('../repositories');
+const { getSnapshotWorker } = require('../snapshot-worker');
 const { NotifyEveryHourJob } = require('./notify-every-time-job');
+const { SnapshotBackupMidnightJob } = require('./snapshot-backup-midnight-job');
 const { WritePlaytimeJob } = require('./write-playtime-job');
 
 const initCronjobApp = () => {
@@ -24,6 +26,11 @@ const initCronjobApp = () => {
 			userPlaytimeRepository,
 			serverStatusRepository,
 			logger: getLogger('writePlaytimeJob')
+		}),
+
+		new SnapshotBackupMidnightJob({
+			snapshotWorker: getSnapshotWorker(),
+			logger: getLogger('snapshotMidnightJob')
 		})
 	];
 

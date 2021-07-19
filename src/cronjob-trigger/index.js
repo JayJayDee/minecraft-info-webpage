@@ -28,6 +28,12 @@ const startCronjobTrigger = () => {
 				eventType: 'HOURLY_AFTER_5MIN'
 			}));
 
+		cron.schedule('0 15 * * *', () =>
+			timeEventProducer.produce({
+				now: new Date(),
+				eventType: 'EVERYDAY_MIDNIGHT'
+			}));
+
 		logger.info('cronjob-trigger is enabled and ready');
 
 	} else {

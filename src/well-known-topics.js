@@ -27,6 +27,10 @@ class WellKnownTopics {
 	static TIME_EVERY_MINUTE() {
 		return 'time:every-minute';
 	}
+
+	static TIME_EVERYDAY_MIDNIGHT() {
+		return 'time:everyday-midnight';
+	}
 }
 
 module.exports = {

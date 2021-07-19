@@ -34,16 +34,16 @@ const { initSnapshotWorker } = require('./snapshot-worker');
 	const port = getConfiguration('HTTP_PORT');
 	const webserver = initExpressApp();
 
-	initCronjobApp();
 	initTelegramBot(
 		getConfiguration('TG_TOKEN'),
 		getConfiguration('MINECRAFT_REST_HOST')
 	);
 
+	initSnapshotWorker();
+	initCronjobApp();
 	initPlayerEventRecorder();
 	initAccidentFreeNotifier();
 	initPlayerJoinNotifier();
-	initSnapshotWorker();
 	startCronjobTrigger();
 
 	webserver.listen(port, () =>

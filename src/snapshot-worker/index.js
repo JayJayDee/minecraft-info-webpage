@@ -1,18 +1,27 @@
-const { getConfiguration } = require('../configurator');
 const { getLogger } = require('../logger');
+const { DefaultSnapshotWorker } = require('./default-snapshot-worker');
 
-const initSnapshotWorker = () => {
-	const enableSnapshotWorker = getConfiguration('ENABLE_SNAPSHOT_WORKER');
+const snapshotWorkerInstanceStore = {
+	Default: null
+};
+
+const initSnapshotWorker = (store = snapshotWorkerInstanceStore) => {
 	const logger = getLogger('snapshot-worker');
-	
-	if (!enableSnapshotWorker) {
-		logger.info('snapShotWorker is DISABLED -> ENABLE_SNAPSHOT_WORKER env-variable is not set');
-		return;
-	}
+	store.Default = new DefaultSnapshotWorker({
+		logger
+	});
+	logger.info('snapShotWorker is ready');
+};
 
-	logger.info('snapShotWorker is enabled and ready');
+const getSnapshotWorker = (key = 'Default', store = snapshotWorkerInstanceStore) => {
+	const instance = store[key];
+	if (!instance) {
+		throw new Error('the snapshotWorker instance not have been initialized');
+	}
+	return instance;
 };
 
 module.exports = {
-	initSnapshotWorker
+	initSnapshotWorker,
+	getSnapshotWorker
 };
