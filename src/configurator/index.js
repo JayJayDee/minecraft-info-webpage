@@ -27,7 +27,8 @@ const configurationStore = {
 	EVENT_LISTENING_KEY: null,
 	ENABLE_MOCK_STATUS_FETCHER: null,
 	ENABLE_CRONTAB_TRIGGER: null,
-	ENABLE_EVENT_RECORDER: null
+	ENABLE_EVENT_RECORDER: null,
+	ENABLE_SNAPSHOT_WORKER: null
 };
 
 const initConfigurations = (store = configurationStore) => {
@@ -44,6 +45,7 @@ const initConfigurations = (store = configurationStore) => {
 	store.ENABLE_MOCK_STATUS_FETCHER = loadOptional('ENABLE_MOCK_STATUS_FETCHER', null);
 	store.ENABLE_CRONTAB_TRIGGER = loadOptional('ENABLE_CRONTAB_TRIGGER', null);
 	store.ENABLE_EVENT_RECORDER = loadOptional('ENABLE_EVENT_RECORDER', null);
+	store.ENABLE_SNAPSHOT_WORKER = loadOptional('ENABLE_SNAPSHOT_WORKER', null);
 };
 
 const getConfiguration = (key, store = configurationStore) => {

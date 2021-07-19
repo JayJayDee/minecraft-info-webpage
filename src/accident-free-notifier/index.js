@@ -9,7 +9,7 @@ const { DefaultAccidentFreeNotifier } = require('./default-accident-free-notifie
  * 무사고 N분/N시간 알리미 init/Dependency injection
  */
 const initAccidentFreeNotifier = () => {
-	const logger = getLogger('accidentFreeNotifier');
+	const logger = getLogger('accident-free-notifier');
 	const eventBroker = getEventBroker();
 	const mcApiRequester = getMcApiRequester();
 	const userEventRepository = getRepository('PlayerEventRepository');

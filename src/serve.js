@@ -15,6 +15,7 @@ const { initCronjobApp } = require('./cronjob-app');
 const { initPlayerEventRecorder } = require('./player-event-recorder');
 const { initAccidentFreeNotifier } = require('./accident-free-notifier');
 const { initPlayerJoinNotifier } = require('./player-join-notifier');
+const { initSnapshotWorker } = require('./snapshot-worker');
 
 (async () => {
 	const log = getLogger('bootstrap');
@@ -42,6 +43,7 @@ const { initPlayerJoinNotifier } = require('./player-join-notifier');
 	initPlayerEventRecorder();
 	initAccidentFreeNotifier();
 	initPlayerJoinNotifier();
+	initSnapshotWorker();
 	startCronjobTrigger();
 
 	webserver.listen(port, () =>

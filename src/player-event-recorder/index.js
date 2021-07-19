@@ -5,7 +5,7 @@ const { getRepository } = require('../repositories');
 const { WellKnownTopics } = require('../well-known-topics');
 
 const initPlayerEventRecorder = () => {
-	const logger = getLogger('playerEventRecorder');
+	const logger = getLogger('player-event-recorder');
 	const eventBroker = getEventBroker();
 	const playerEventRepository = getRepository('PlayerEventRepository');
 	const enableEventRecorder = getConfiguration('ENABLE_EVENT_RECORDER');

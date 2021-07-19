@@ -5,7 +5,7 @@ const { getRepository } = require('../repositories');
 const { WellKnownTopics } = require('../well-known-topics');
 
 const initPlayerJoinNotifier = () => {
-	const logger = getLogger('playerJoinNotifier');
+	const logger = getLogger('player-join-notifier');
 	const mcApiRequester = getMcApiRequester();
 	const eventBroker = getEventBroker();
 	const userPlayTimeRepository = getRepository('UserPlaytimeRepository');
