@@ -16,6 +16,15 @@ class PlayerEventProducer extends BaseEventProducer {
 	produce(payload) {
 		const { eventType } = payload;
 
+		const nickName =
+			payload.playerName ? payload.playerName :
+				payload.player.displayName ? payload.player.displayName : null;
+
+		if (nickName && nickName.includes('-bot')) {
+			// bot 종류 무시
+			return;
+		}
+
 		if (eventType === 'PlayerChat') {
 			this._eventBroker.publish(
 				WellKnownTopics.CHAT(),
