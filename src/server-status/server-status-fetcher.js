@@ -43,8 +43,9 @@ class ServerStatusFetcher {
 		});
 
 		const sorted =
-			convertedAllPlayers.sort((a, b) =>
-				a.minPlayed > b.minPlayed ? -1 : 1);
+			convertedAllPlayers
+				.filter((p) => p.minPlayed > 0)
+				.sort((a, b) => a.minPlayed > b.minPlayed ? -1 : 1);
 
 		if (take === undefined) {
 			return sorted;
