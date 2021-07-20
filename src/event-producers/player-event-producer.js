@@ -28,7 +28,7 @@ class PlayerEventProducer extends BaseEventProducer {
 
 		if (eventType === 'PlayerChat') {
 			// 특정 플레이어 채팅 broadcast 차단 요청 -> // TODO: 이것도 별도 모듈로 관리하도록 수정
-			if (['bboloe', 'CCC', 'HEATHER'].includes(nickName)) {
+			if (['bboloe', 'CCC', 'HEATHER', 'oddy'].includes(nickName)) {
 				logger.debug(`specific player chatting event ignored, ${nickName}`);
 				return;
 			}
