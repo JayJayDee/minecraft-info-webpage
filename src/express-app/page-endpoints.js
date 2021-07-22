@@ -108,6 +108,14 @@ const pageEndpointsRouter = () => {
 			})
 	]);
 
+	router.get('/project/kumoh', [
+		getMiddleware('ServerStatus'),
+		async (req, res) =>
+			res.render('project-kumoh', {
+				... req.serverStatus
+			})
+	]);
+
 	return router;
 };
 
