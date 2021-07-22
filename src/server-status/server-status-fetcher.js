@@ -1,5 +1,6 @@
 const { ChatEventVO, DeathEventVO } = require('../event-producers/vo');
 const { PlaytimeVO } = require('../repositories/vo/playtime-vo');
+const { WorldStatusVO } = require('../repositories/vo/world-status-vo');
 
 class ServerStatusFetcher {
 
@@ -80,6 +81,12 @@ class ServerStatusFetcher {
 			return null;
 		}
 		return deathEventVO;
+	}
+
+	async getOverworldStatus() {
+		const worldStatuses = await this._serverStatusRepo.findWorldStatuses();
+		const overworld = worldStatuses.find(world => world.worldType === WorldStatusVO.Overworld());
+		return overworld;
 	}
 }
 

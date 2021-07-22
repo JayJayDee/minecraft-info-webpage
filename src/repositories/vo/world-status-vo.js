@@ -29,10 +29,25 @@ class WorldStatusVO {
 		return 'THE_END';
 	}
 
+	static DAY() {
+		return 'DAY';
+	}
+
+	static NIGHT() {
+		return 'NIGHT';
+	}
+
 	static fromSeverResponseElement(element) {
-		return new ServerPlayerVO({
-			uuid: element.uuid,
-			nickname: element.displayName
+		return new WorldStatusVO({
+			worldUuid: element.uuid,
+			worldName: element.name,
+			worldTime: element.time,
+			worldType:
+				element.name === 'world_the_end' ? WorldStatusVO.TheEnd() :
+				element.name === 'world_nether' ? WorldStatusVO.Nether() :
+				WorldStatusVO.Overworld(),
+			storm: element.storm,
+			thundering: element.thundering
 		});
 	}
 
@@ -50,6 +65,20 @@ class WorldStatusVO {
 
 	get worldType() {
 		return this._worldType;
+	}
+
+	hourMinExpression() {
+		const hour = (Math.floor(this._worldTime / 1000) + 6) % 24;
+		const minute = Math.floor((this._worldTime % 1000) * 60 / 1000);
+		return { hour, minute };
+	} 
+
+	dayOrNight() {
+		const { hour } = this.hourMinExpression();
+		if (hour >= 6 && hour < 18) {
+			return WorldStatusVO.DAY();
+		}
+		return WorldStatusVO.NIGHT();
 	}
 }
 

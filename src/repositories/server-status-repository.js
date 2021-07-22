@@ -1,4 +1,5 @@
 const { ServerPlayerVO } = require('./vo/server-player');
+const { WorldStatusVO } = require('./vo/world-status-vo');
 
 class ServerStatusRepository {
 
@@ -9,7 +10,11 @@ class ServerStatusRepository {
 	}
 
 	async findWorldStatuses() {
-		// TODO: to be implemented
+		const allWorldsRaw = await this._mcApiRequester.requestWorlds();
+		if (!allWorldsRaw) {
+			return [];
+		}
+		return allWorldsRaw.map(WorldStatusVO.fromSeverResponseElement);
 	}
 
 	async findAllPlayers() {
