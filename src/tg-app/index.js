@@ -90,7 +90,7 @@ const initTelegramBot = (token) => {
         WellKnownTopics.JOIN(),
         (joinEventVO) => {
             const name = joinEventVO.nickname;
-            roomIds.forEach(id => sendMessage(id,  `[${name}] 입장 어서오고!`));
+            roomIds.forEach(id => sendMessage(id,  `[입장][${name}] 어서오고!`));
         });
 
     eventBroker.subscribe(
@@ -99,6 +99,13 @@ const initTelegramBot = (token) => {
             const name = deathEventVO.nickname;
             const message = deathEventVO.deathMessage;
             roomIds.forEach(id => sendMessage(id,  `[사망][${name}]... ${message}`));
+        });
+
+    eventBroker.subscribe(
+        WellKnownTopics.QUIT(),
+        (quitEventVO) => {
+            const name = quitEventVO.nickname;
+            roomIds.forEach(id => sendMessage(id,  `[퇴장][${name}] 기억할게! `));
         });
 
     logger.info('telegram bot is ready');
