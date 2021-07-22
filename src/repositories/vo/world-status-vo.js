@@ -33,6 +33,10 @@ class WorldStatusVO {
 		return 'DAY';
 	}
 
+	static SUNSET() {
+		return 'SUNSET';
+	}
+
 	static NIGHT() {
 		return 'NIGHT';
 	}
@@ -68,14 +72,20 @@ class WorldStatusVO {
 	}
 
 	hourMinExpression() {
-		const hour = (Math.floor(this._worldTime / 1000) + 6) % 24;
-		const minute = Math.floor((this._worldTime % 1000) * 60 / 1000);
+		const hour = Math.floor(this._worldTime / 1000);
+		const minute = Math.floor((this._worldTime % 1000) / 1000 * 60);
 		return { hour, minute };
 	} 
 
 	dayOrNight() {
-		const { hour } = this.hourMinExpression();
-		if (hour >= 6 && hour < 18) {
+		const { hour, minute } = this.hourMinExpression();
+		if (hour >= 0 && hour < 12) {
+			if (hour >= 10 && minute >= 30) {
+				return WorldStatusVO.SUNSET();
+			}
+			return WorldStatusVO.DAY();
+		}
+		if (hour >= 0 && hour <= 10 && minute < 30) {
 			return WorldStatusVO.DAY();
 		}
 		return WorldStatusVO.NIGHT();
